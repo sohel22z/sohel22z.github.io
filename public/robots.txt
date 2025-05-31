@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://sohel22z.github.io/sitemap.xml
