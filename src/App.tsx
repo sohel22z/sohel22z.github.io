@@ -62,14 +62,14 @@ export default function App() {
   useEffect(() => {
     const fetchData = async () => {
       const username = import.meta.env.VITE_GITHUB_USERNAME;
-      const token = import.meta.env.VITE_GITHUB_TOKEN;
+      const key = import.meta.env.VITE_GITHUB_TOKEN;
 
       // Build headers including Authorization
       const headers: Record<string, string> = {
         Accept: "application/vnd.github.mercy-preview+json",
       };
-      if (token) {
-        headers["Authorization"] = `token ${token}`;
+      if (key) {
+        headers["Authorization"] = `token ${key}`;
       }
 
       try {
