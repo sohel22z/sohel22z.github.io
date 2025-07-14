@@ -326,6 +326,9 @@ export default function App() {
             </motion.div>
           ))}
         </div>
+        <div className="mt-10 text-center">
+          <button onClick={() => window.open("https://github.com/sohel22z?tab=repositories", "_blank")} className="bg-indigo-600 hover:bg-indigo-700 text-white py-3 px-8 rounded-full font-semibold shadow-lg transition">View All</button>
+        </div>
       </section>
 
       {/* Social Section */}
