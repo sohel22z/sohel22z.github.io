@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import {
   FaCode,
   FaCodeBranch,
+  FaCodepen,
   FaCss3Alt, FaDatabase,
   FaGitAlt,
   FaGithub,
@@ -73,7 +74,6 @@ export default function App() {
       }
 
       try {
-        // 1. Fetch user profile
         const userResponse = await fetch(`https://api.github.com/users/${username}`, { headers });
         if (!userResponse.ok) {
           console.error("GitHub user fetch error:", userResponse.status);
@@ -82,11 +82,11 @@ export default function App() {
           setUser(userData);
         }
 
-        // 2. Fetch repos
         const reposResponse = await fetch(
           `https://api.github.com/users/${username}/repos?per_page=6&sort=updated`,
           { headers }
         );
+
         if (!reposResponse.ok) {
           console.error("GitHub repos fetch error:", reposResponse.status);
         } else {
@@ -102,6 +102,7 @@ export default function App() {
             setRepos([]);
           }
         }
+
       } catch (err) {
         console.error("Unexpected error fetching GitHub data:", err);
       }
@@ -114,17 +115,13 @@ export default function App() {
     const skillCounts: Record<string, number> = {};
 
     repos.forEach((repo) => {
-      // Count primary language
       if (repo.language) {
         skillCounts[repo.language] = (skillCounts[repo.language] || 0) + 1;
       }
-      // Count each topic
       repo.topics.forEach((topic) => {
         skillCounts[topic] = (skillCounts[topic] || 0) + 1;
       });
     });
-
-    // Convert to array of { name, count } and sort descending
     return Object.entries(skillCounts)
       .map(([name, count]) => ({ name, count }))
       .sort((a, b) => b.count - a.count);
@@ -182,6 +179,7 @@ export default function App() {
           >
             Explore Projects
           </button>
+
           <button
             onClick={() => {
               document.getElementById("social")?.scrollIntoView({ behavior: "smooth" });
@@ -340,6 +338,15 @@ export default function App() {
           Connect with Me
         </h2>
         <div className="flex justify-center space-x-8 flex-wrap">
+          <motion.a
+            href="https://codepen.io/sohel22z"
+            target="_blank"
+            className="text-gray-700 hover:text-indigo-600 text-5xl transition"
+            whileHover={{ scale: 1.1 }}
+            aria-label="Codepen"
+          >
+            <FaCodepen />
+          </motion.a>
           <motion.a
             href="https://linkedin.com/in/sohelansarii"
             target="_blank"
