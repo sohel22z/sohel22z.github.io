@@ -1,22 +1,14 @@
-// App.tsx
-import { motion } from "framer-motion";
-import type { JSX } from "react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import {
-  FaCode,
-  FaCodeBranch,
-  FaCodepen,
-  FaCss3Alt, FaDatabase,
-  FaGitAlt,
+  FaArrowRight,
   FaGithub,
-  FaHtml5,
-  FaJsSquare,
   FaLinkedin,
-  FaNode,
-  FaPython,
-  FaReact,
-  FaStar,
-  FaTwitter
+  FaTwitter,
+  FaExternalLinkAlt,
+  FaCode,
+  FaLayerGroup,
+  FaRocket,
+  FaMapMarker,
 } from "react-icons/fa";
 import "./index.css";
 
@@ -28,6 +20,9 @@ interface GitHubUser {
   following: number;
   location: string;
   blog: string;
+  login: string;
+  html_url: string;
+  public_repos: number;
 }
 
 interface GitHubRepo {
@@ -37,358 +32,672 @@ interface GitHubRepo {
   stargazers_count: number;
   forks_count: number;
   language: string;
-  open_issues_count: number;
-  license: { name: string } | null;
   html_url: string;
-  updated_at: string;
+  homepage: string;
   topics: string[];
 }
 
-export default function App() {
-  const [user, setUser] = useState<GitHubUser | null>(null);
-  const [repos, setRepos] = useState<GitHubRepo[]>([]);
+const defaultUser: GitHubUser = {
+  avatar_url: "https://avatars.githubusercontent.com/u/9919?v=4",
+  name: "Sohel Ansari",
+  bio: "Frontend Developer | React, TypeScript, TailwindCSS | Building for the web",
+  followers: 25,
+  following: 50,
+  location: "India",
+  blog: "https://github.com/sohel22z",
+  login: "sohel22z",
+  html_url: "https://github.com/sohel22z",
+  public_repos: 15,
+};
 
-  const skillIconMap: Record<string, JSX.Element> = {
-    JavaScript: <FaJsSquare className="text-yellow-500" size={20} />,
-    TypeScript: <FaJsSquare className="text-blue-400" size={20} />,
-    React: <FaReact className="text-blue-600" size={20} />,
-    "Node.js": <FaNode className="text-green-600" size={20} />,
-    TailwindCSS: <FaCss3Alt className="text-blue-300" size={20} />,
-    PostgreSQL: <FaDatabase className="text-blue-800" size={20} />,
-    HTML5: <FaHtml5 className="text-red-600" size={20} />,
-    Git: <FaGitAlt className="text-gray-700" size={20} />,
-    Python: <FaPython className="text-blue-400" size={20} />,
-  };
+const services = [
+  {
+    icon: <FaCode size={24} />,
+    title: "Frontend Development",
+    description:
+      "Building responsive, accessible interfaces with React, TypeScript, and modern CSS. Clean code is my baseline.",
+    tags: ["React", "TypeScript", "TailwindCSS"],
+  },
+  {
+    icon: <FaLayerGroup size={24} />,
+    title: "UI/UX Implementation",
+    description:
+      "Translating designs into pixel-perfect, interactive experiences. I pay attention to the details that matter.",
+    tags: ["Figma", "Accessibility", "Animation"],
+  },
+  {
+    icon: <FaRocket size={24} />,
+    title: "Performance & Optimization",
+    description:
+      "Making websites fast and smooth. Core Web Vitals aren't just metrics to me—they're requirements.",
+    tags: ["Core Web Vitals", "SEO", "Speed"],
+  },
+];
+
+const timeline = [
+  {
+    period: "2024 - Present",
+    role: "Frontend Developer",
+    company: "Learning & Building",
+    description:
+      "Focused on React ecosystem, TypeScript, and building real-world projects. Expanding into full-stack development.",
+  },
+  {
+    period: "2023 - 2024",
+    role: "Started Development",
+    company: "Self-taught Journey",
+    description:
+      "Began with HTML, CSS, and JavaScript. Built first projects and fell in love with creating things for the web.",
+  },
+];
+
+const skills = {
+  frontend: [
+    { name: "React / Next.js", level: 92 },
+    { name: "TypeScript", level: 88 },
+    { name: "TailwindCSS", level: 90 },
+    { name: "JavaScript", level: 90 },
+  ],
+  backend: [
+    { name: "Node.js", level: 55 },
+    { name: "PostgreSQL", level: 45 },
+    { name: "REST APIs", level: 60 },
+  ],
+};
+
+const defaultRepos: GitHubRepo[] = [
+  {
+    id: 1,
+    name: "portfolio-website",
+    description: "My personal portfolio built with React, TypeScript, and TailwindCSS",
+    stargazers_count: 5,
+    forks_count: 2,
+    language: "TypeScript",
+    html_url: "https://github.com/sohel22z/portfolio-website",
+    homepage: "https://sohel22z.github.io",
+    topics: ["react", "typescript", "portfolio"],
+  },
+  {
+    id: 2,
+    name: "task-manager",
+    description: "A task management app with React and local storage",
+    stargazers_count: 3,
+    forks_count: 1,
+    language: "JavaScript",
+    html_url: "https://github.com/sohel22z/task-manager",
+    homepage: "",
+    topics: ["react", "javascript"],
+  },
+  {
+    id: 3,
+    name: "weather-app",
+    description: "Weather forecast app using OpenWeatherMap API",
+    stargazers_count: 2,
+    forks_count: 1,
+    language: "TypeScript",
+    html_url: "https://github.com/sohel22z/weather-app",
+    homepage: "",
+    topics: ["react", "api"],
+  },
+  {
+    id: 4,
+    name: "todo-app",
+    description: "Simple todo app with add, edit, delete functionality",
+    stargazers_count: 1,
+    forks_count: 0,
+    language: "JavaScript",
+    html_url: "https://github.com/sohel22z/todo-app",
+    homepage: "",
+    topics: ["javascript", "dom"],
+  },
+  {
+    id: 5,
+    name: "css-snippets",
+    description: "Collection of useful CSS snippets and patterns",
+    stargazers_count: 8,
+    forks_count: 3,
+    language: "CSS",
+    html_url: "https://github.com/sohel22z/css-snippets",
+    homepage: "",
+    topics: ["css", "snippets"],
+  },
+  {
+    id: 6,
+    name: "javascript-projects",
+    description: "Vanilla JavaScript projects for practice",
+    stargazers_count: 4,
+    forks_count: 2,
+    language: "JavaScript",
+    html_url: "https://github.com/sohel22z/javascript-projects",
+    homepage: "",
+    topics: ["javascript", "practice"],
+  },
+];
+
+export default function App() {
+  const [user, setUser] = useState<GitHubUser>(defaultUser);
+  const [repos, setRepos] = useState<GitHubRepo[]>(defaultRepos);
+  const [activeSection, setActiveSection] = useState("home");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
-      const username = import.meta.env.VITE_GITHUB_USERNAME;
+      const username = import.meta.env.VITE_GITHUB_USERNAME || "sohel22z";
       const key = import.meta.env.VITE_GITHUB_TOKEN;
 
-      // Build headers including Authorization
       const headers: Record<string, string> = {
-        Accept: "application/vnd.github.mercy-preview+json",
+        Accept: "application/vnd.github.v3+json",
       };
       if (key) {
-        headers["Authorization"] = `token ${key}`;
+        headers["Authorization"] = `Bearer ${key}`;
       }
 
       try {
-        const userResponse = await fetch(`https://api.github.com/users/${username}`, { headers });
-        if (!userResponse.ok) {
-          console.error("GitHub user fetch error:", userResponse.status);
-        } else {
-          const userData: GitHubUser = await userResponse.json();
-          setUser(userData);
+        const [userRes, reposRes] = await Promise.all([
+          fetch(`https://api.github.com/users/${username}`, { headers }),
+          fetch(
+            `https://api.github.com/users/${username}/repos?sort=updated&per_page=6&type=public`,
+            { headers }
+          ),
+        ]);
+
+        if (userRes.ok) {
+          const userData = await userRes.json();
+          setUser({
+            ...userData,
+            public_repos: userData.public_repos || 0,
+          });
         }
 
-        const reposResponse = await fetch(
-          `https://api.github.com/users/${username}/repos?per_page=6&sort=updated`,
-          { headers }
-        );
-
-        if (!reposResponse.ok) {
-          console.error("GitHub repos fetch error:", reposResponse.status);
-        } else {
-          const data = await reposResponse.json();
-
-          if (Array.isArray(data)) {
-            const sorted = (data as GitHubRepo[]).sort(
-              (a, b) => b.stargazers_count - a.stargazers_count
+        if (reposRes.ok) {
+          const data = await reposRes.json();
+          if (Array.isArray(data) && data.length > 0) {
+            setRepos(
+              data
+                .filter((r: GitHubRepo) => !r.name.startsWith("."))
+                .sort((a: GitHubRepo, b: GitHubRepo) => b.stargazers_count - a.stargazers_count)
             );
-            setRepos(sorted.slice(0, 6));
-          } else {
-            console.error("Unexpected response from GitHub API:", data);
-            setRepos([]);
           }
         }
-
       } catch (err) {
-        console.error("Unexpected error fetching GitHub data:", err);
+        console.log("Using default data");
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchData();
   }, []);
 
-  const aggregatedSkills = useMemo(() => {
-    const skillCounts: Record<string, number> = {};
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+            entry.target.querySelectorAll(".fade-in").forEach((el) => {
+              el.classList.add("visible");
+            });
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
 
-    repos.forEach((repo) => {
-      if (repo.language) {
-        skillCounts[repo.language] = (skillCounts[repo.language] || 0) + 1;
-      }
-      repo.topics.forEach((topic) => {
-        skillCounts[topic] = (skillCounts[topic] || 0) + 1;
-      });
+    document.querySelectorAll("section").forEach((section) => {
+      observer.observe(section);
     });
-    return Object.entries(skillCounts)
-      .map(([name, count]) => ({ name, count }))
-      .sort((a, b) => b.count - a.count);
-  }, [repos]);
+
+    return () => observer.disconnect();
+  }, []);
+
+  const scrollTo = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    setIsMenuOpen(false);
+  };
+
+  const navItems = [
+    { id: "home", label: "Home" },
+    { id: "services", label: "Services" },
+    { id: "work", label: "Work" },
+    { id: "about", label: "About" },
+    { id: "contact", label: "Contact" },
+  ];
 
   return (
-    <div className="font-sans text-gray-800">
+    <div className="min-h-screen bg-background text-foreground">
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-md border-b border-border">
+        <div className="container">
+          <div className="flex items-center justify-between h-16">
+            <a
+              href={user.html_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold text-xl tracking-tight"
+            >
+              SA
+            </a>
+
+            <div className="desktop-only flex items-center gap-10">
+              {navItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollTo(item.id)}
+                  className={`nav-link ${activeSection === item.id ? "active" : ""}`}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+
+            <button
+              className="mobile-only p-2 -mr-2"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                {isMenuOpen ? (
+                  <path
+                    d="M6 6L18 18M6 18L18 6"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
+                ) : (
+                  <path
+                    d="M4 6H20M4 12H20M4 18H20"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
+                )}
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        {isMenuOpen && (
+          <div className="mobile-only bg-surface border-t border-border">
+            <div className="container py-4">
+              {navItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollTo(item.id)}
+                  className="block w-full text-left py-3 text-base font-medium"
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+      </nav>
+
       {/* Hero Section */}
-      <motion.section
-        id="hero"
-        className="min-h-screen flex flex-col justify-center items-center text-center px-6 bg-gradient-to-b from-indigo-50 to-white"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-      >
-        {user && (
-          <motion.img
-            src={user.avatar_url}
-            alt="avatar"
-            className="w-32 h-32 rounded-full mb-4 shadow-lg"
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.2 }}
-          />
-        )}
-        <motion.h1
-          className="text-4xl md:text-6xl font-extrabold text-gray-900 mb-2"
-          initial={{ y: -30, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.4 }}
-        >
-          {user ? user.name : "Sohel Ansari"}
-        </motion.h1>
-        {user && (
-          <motion.p
-            className="text-md text-gray-600 mb-6 max-w-xl"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
-          >
-            {user.bio}
-          </motion.p>
-        )}
-        <motion.div
-          className="space-x-4"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1 }}
-        >
-          <button
-            onClick={() => {
-              document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
-            }}
-            className="bg-indigo-600 hover:bg-indigo-700 text-white py-3 px-8 rounded-full font-semibold shadow-lg transition"
-          >
-            Explore Projects
-          </button>
-
-          <button
-            onClick={() => {
-              document.getElementById("social")?.scrollIntoView({ behavior: "smooth" });
-            }}
-            className="border border-indigo-600 hover:border-indigo-500 text-indigo-600 hover:text-indigo-500 py-3 px-8 rounded-full font-semibold transition"
-          >
-            Social Links
-          </button>
-        </motion.div>
-      </motion.section>
-
-      {/* About Section */}
-      <section
-        id="about"
-        className="px-6 py-16 max-w-3xl mx-auto text-center bg-white"
-      >
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">About Me</h2>
-        <p className="text-gray-700 leading-relaxed">
-          {user
-            ? user.bio
-            : "I’m a frontend developer specializing in crafting engaging, accessible, and intuitive user interfaces. With a focus on React, TypeScript, and TailwindCSS, I turn ideas into polished products that users love."}
-        </p>
-        {user && user.blog && (
-          <a
-            href={
-              user.blog.startsWith("http")
-                ? user.blog
-                : `https://www.linkedin.com/in/sohelansarii/`
-            }
-            target="_blank"
-            className="text-indigo-600 hover:underline text-sm mt-2 inline-block"
-          >
-            My Blog
-          </a>
-        )}
-      </section>
-
-      {/* Skills Section (static examples) */}
-
-      <section id="skills" className="bg-gray-50 px-6 py-16">
-        <h2 className="text-3xl font-bold text-gray-900 text-center mb-8">Skills</h2>
-
-        <div className="flex flex-wrap justify-center gap-4 max-w-5xl mx-auto">
-          {(() => {
-            const aggregatedSet = new Set(aggregatedSkills.map((s) => s.name));
-
-            const mostUsedSkills = aggregatedSkills.map((s) => ({
-              name: s.name,
-              icon: skillIconMap[s.name] || <FaCode className="text-gray-700" size={20} />,
-            }));
-
-            const remainingSkills = Object.entries(skillIconMap)
-              .filter(([name]) => !aggregatedSet.has(name))
-              .map(([name, icon]) => ({ name, icon }));
-
-            const finalSkills = [...mostUsedSkills, ...remainingSkills];
-
-            return finalSkills.map(({ name, icon }) => (
-              <motion.div
-                key={name}
-                className="flex items-center bg-white border border-gray-200 px-4 py-2 rounded-full text-sm font-medium shadow-sm text-gray-800"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 200 }}
+      <section id="home" className="min-h-screen flex items-center pt-16">
+        <div className="container">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            <div className="lg:col-span-7 order-2 lg:order-1">
+              <p className="label fade-in">
+                <span className="flex items-center gap-2">
+                  <FaMapMarker size={12} />
+                  Available for Projects
+                </span>
+              </p>
+              <h1 className="heading-xl mb-6 fade-in text-foreground" style={{ transitionDelay: "0.1s" }}>
+                I turn ideas
+                <br />
+                <span className="text-accent">into interfaces</span>
+                <br />
+                that users love.
+              </h1>
+              <p
+                className="text-large mb-8 fade-in"
+                style={{ transitionDelay: "0.2s" }}
               >
-                {icon}
-                <span className="ml-2">{name}</span>
-              </motion.div>
-            ));
-          })()}
+                Frontend developer specializing in React & TypeScript. 
+                I build fast, accessible, and visually polished web applications 
+                that help businesses grow.
+              </p>
+              <div
+                className="flex flex-wrap gap-4 fade-in"
+                style={{ transitionDelay: "0.3s" }}
+              >
+                <button onClick={() => scrollTo("work")} className="btn-primary">
+                  See My Work <FaArrowRight size={16} />
+                </button>
+                <button onClick={() => scrollTo("contact")} className="btn-secondary">
+                  Start a Project
+                </button>
+              </div>
+
+              <div
+                className="flex gap-8 mt-12 pt-8 border-t border-border fade-in"
+                style={{ transitionDelay: "0.4s" }}
+              >
+                <div>
+                  <p className="stat-number">{user.public_repos}</p>
+                  <p className="text-sm mt-1">Projects</p>
+                </div>
+                <div>
+                  <p className="stat-number">{user.followers}</p>
+                  <p className="text-sm mt-1">Followers</p>
+                </div>
+                <div>
+                  <p className="stat-number">2+</p>
+                  <p className="text-sm mt-1">Years</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="lg:col-span-5 order-1 lg:order-2 flex justify-center lg:justify-end fade-in">
+              <a
+                href={user.html_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative block"
+              >
+                <img
+                  src={user.avatar_url}
+                  alt={user.name || ""}
+                  className="w-56 h-56 md:w-72 md:h-72 rounded-2xl object-cover"
+                  style={{ boxShadow: "0 8px 24px rgba(0, 0, 0, 0.08)" }}
+                />
+                <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-accent rounded-full flex items-center justify-center">
+                  <FaGithub className="text-white" size={18} />
+                </div>
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Projects Section: Fetched from GitHub */}
-      <section
-        id="projects"
-        className="px-6 py-16 max-w-6xl mx-auto bg-white"
-      >
-        <h2 className="text-3xl font-bold text-gray-900 text-center mb-8">
-          Projects
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {repos.map((repo) => (
-            <motion.div
-              key={repo.id}
-              className="bg-white border border-gray-200 rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow flex flex-col justify-between"
-              whileHover={{ y: -5 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                  {repo.name}
-                </h3>
-                {repo.description && (
-                  <p className="text-gray-600 text-sm mb-2">
-                    {repo.description}
-                  </p>
-                )}
-                <div className="flex flex-wrap items-center space-x-2 text-gray-500 text-sm mb-2">
-                  {repo.language && (
-                    <span className="inline-block bg-gray-100 px-2 py-1 rounded-full">
-                      {repo.language}
-                    </span>
-                  )}
-                  {repo.license && (
-                    <span className="inline-block bg-gray-100 px-2 py-1 rounded-full">
-                      {repo.license.name}
-                    </span>
-                  )}
-                  <span className="flex items-center">
-                    <FaStar className="mr-1" /> {repo.stargazers_count}
-                  </span>
-                  <span className="flex items-center">
-                    <FaCodeBranch className="mr-1" /> {repo.forks_count}
-                  </span>
-                  <span className="flex items-center">
-                    Issues: {repo.open_issues_count}
-                  </span>
+      {/* Services Section */}
+      <section id="services" className="section bg-surface">
+        <div className="container">
+          <div className="mb-12">
+            <p className="label fade-in">What I Do</p>
+            <h2 className="heading-lg fade-in">Services</h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {services.map((service, index) => (
+              <div
+                key={service.title}
+                className="card-service fade-in"
+                style={{ transitionDelay: `${index * 0.1}s` }}
+              >
+                <div className="w-12 h-12 rounded-lg bg-accent-light flex items-center justify-center text-accent mb-5">
+                  {service.icon}
                 </div>
-                {repo.topics && repo.topics.length > 0 && (
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {repo.topics.map((topic) => (
-                      <span
-                        key={topic}
-                        className="text-xs bg-indigo-100 text-indigo-700 px-2 py-1 rounded-full"
-                      >
-                        {topic}
-                      </span>
-                    ))}
-                  </div>
-                )}
-                <p className="text-xs text-gray-400">
-                  Updated: {new Date(repo.updated_at).toLocaleDateString()}
-                </p>
+                <h3 className="heading-md mb-3">{service.title}</h3>
+                <p className="text-body mb-5">{service.description}</p>
+                <div className="flex flex-wrap gap-2">
+                  {service.tags.map((tag) => (
+                    <span key={tag} className="skill-tag">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Work Section */}
+      <section id="work" className="section bg-background">
+        <div className="container">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+            <div>
+              <p className="label fade-in">Portfolio</p>
+              <h2 className="heading-lg fade-in">Selected Work</h2>
+            </div>
+            <a
+              href={`https://github.com/${user.login}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-text fade-in"
+            >
+              View GitHub <FaExternalLinkAlt size={14} />
+            </a>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {repos.slice(0, 6).map((repo, index) => (
               <a
+                key={repo.id}
                 href={repo.html_url}
                 target="_blank"
-                className="mt-4 inline-block bg-indigo-100 text-indigo-700 py-2 px-4 rounded-full font-medium hover:bg-indigo-200 transition text-center"
+                rel="noopener noreferrer"
+                className="card fade-in group"
+                style={{ transitionDelay: `${index * 0.08}s` }}
               >
-                View Repo →
+                <div className="flex items-start justify-between mb-4">
+                  <div className="w-10 h-10 rounded-lg bg-hover flex items-center justify-center group-hover:bg-accent-light group-hover:text-accent transition-colors">
+                    <FaGithub size={18} />
+                  </div>
+                  <div className="flex gap-4 text-muted-foreground text-sm font-mono">
+                    <span>{repo.stargazers_count} ★</span>
+                    <span>{repo.forks_count}</span>
+                  </div>
+                </div>
+
+                <h3 className="heading-md mb-2 group-hover:text-accent transition-colors">
+                  {repo.name}
+                </h3>
+                <p className="text-body mb-4 line-clamp-2">
+                  {repo.description || "View project on GitHub"}
+                </p>
+
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {repo.language && (
+                    <span className="skill-tag skill-tag-accent">{repo.language}</span>
+                  )}
+                  {repo.topics?.slice(0, 2).map((topic) => (
+                    <span key={topic} className="skill-tag">
+                      {topic}
+                    </span>
+                  ))}
+                </div>
+
+                {repo.homepage && (
+                  <div className="pt-4 border-t border-border">
+                    <span className="text-sm font-medium text-accent flex items-center gap-1">
+                      Live Demo <FaExternalLinkAlt size={12} />
+                    </span>
+                  </div>
+                )}
               </a>
-            </motion.div>
-          ))}
-        </div>
-        <div className="mt-10 text-center">
-          <button onClick={() => window.open("https://github.com/sohel22z?tab=repositories", "_blank")} className="bg-indigo-600 hover:bg-indigo-700 text-white py-3 px-8 rounded-full font-semibold shadow-lg transition">View All</button>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Social Section */}
-      <section
-        id="social"
-        className="px-6 py-16 bg-gradient-to-r from-indigo-50 via-white to-green-50"
-      >
-        <h2 className="text-3xl font-bold text-gray-900 text-center mb-6">
-          Connect with Me
-        </h2>
-        <div className="flex justify-center space-x-8 flex-wrap">
-          <motion.a
-            href="https://codepen.io/sohel22z"
-            target="_blank"
-            className="text-gray-700 hover:text-indigo-600 text-5xl transition"
-            whileHover={{ scale: 1.1 }}
-            aria-label="Codepen"
-          >
-            <FaCodepen />
-          </motion.a>
-          <motion.a
-            href="https://linkedin.com/in/sohelansarii"
-            target="_blank"
-            className="text-gray-700 hover:text-indigo-600 text-5xl transition"
-            whileHover={{ scale: 1.1 }}
-            aria-label="LinkedIn"
-          >
-            <FaLinkedin />
-          </motion.a>
-          <motion.a
-            href="https://github.com/sohel22z"
-            target="_blank"
-            className="text-gray-700 hover:text-indigo-600 text-5xl transition"
-            whileHover={{ scale: 1.1 }}
-            aria-label="GitHub"
-          >
-            <FaGithub />
-          </motion.a>
-          <motion.a
-            href="https://twitter.com/sohelansarii"
-            target="_blank"
-            className="text-gray-700 hover:text-indigo-600 text-5xl transition"
-            whileHover={{ scale: 1.1 }}
-            aria-label="Twitter"
-          >
-            <FaTwitter />
-          </motion.a>
-          {/* <motion.a
-            href="/resume.pdf"
-            target="_blank"
-            className="text-gray-700 hover:text-indigo-600 text-5xl transition"
-            whileHover={{ scale: 1.1 }}
-            aria-label="Resume"
-          >
-            <FaDownload />
-          </motion.a> */}
+      {/* About Section */}
+      <section id="about" className="section bg-surface">
+        <div className="container">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+            <div className="lg:col-span-5">
+              <p className="label fade-in">The Story</p>
+              <h2 className="heading-lg mb-6 fade-in">Who I Am</h2>
+              <div className="space-y-4 fade-in">
+                <p className="text-large">
+                  I'm a frontend developer who believes great software starts with great interfaces.
+                </p>
+                <p className="text-body">
+                  My journey began with curiosity about how websites work. That curiosity grew into 
+                  a passion for building them. Today, I specialize in React and TypeScript, 
+                  crafting applications that are fast, accessible, and easy to use.
+                </p>
+                <p className="text-body">
+                  Beyond frontend, I'm expanding into full-stack development—learning how to 
+                  build complete solutions. From database design to API development, I'm 
+                  committed to understanding the entire picture.
+                </p>
+                <p className="text-body">
+                  When I'm not coding, you'll find me exploring new technologies, contributing 
+                  to open source, or sharing what I've learned with the community.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-3 gap-4 mt-10 pt-8 border-t border-border fade-in">
+                <div>
+                  <p className="stat-number">{user.public_repos}</p>
+                  <p className="text-sm mt-1">Projects</p>
+                </div>
+                <div>
+                  <p className="stat-number">2+</p>
+                  <p className="text-sm mt-1">Years</p>
+                </div>
+                <div>
+                  <p className="stat-number">100%</p>
+                  <p className="text-sm mt-1">Dedication</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="lg:col-span-1" />
+
+            <div className="lg:col-span-6">
+              <p className="label fade-in">Skills</p>
+
+              <div className="space-y-8 fade-in">
+                <div>
+                  <h3 className="heading-sm mb-5">Frontend</h3>
+                  <div className="space-y-4">
+                    {skills.frontend.map((skill) => (
+                      <div key={skill.name}>
+                        <div className="flex justify-between mb-2">
+                          <span className="text-sm font-medium">{skill.name}</span>
+                          <span className="text-sm text-muted-foreground font-mono">
+                            {skill.level}%
+                          </span>
+                        </div>
+                        <div className="h-2 bg-border rounded-full overflow-hidden">
+                          <div
+                            className="h-full bg-foreground rounded-full"
+                            style={{ width: `${skill.level}%` }}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="heading-sm mb-5">Backend (Learning)</h3>
+                  <div className="space-y-4">
+                    {skills.backend.map((skill) => (
+                      <div key={skill.name}>
+                        <div className="flex justify-between mb-2">
+                          <span className="text-sm font-medium">{skill.name}</span>
+                          <span className="text-sm text-muted-foreground font-mono">
+                            {skill.level}%
+                          </span>
+                        </div>
+                        <div className="h-2 bg-border rounded-full overflow-hidden">
+                          <div
+                            className="h-full bg-muted-foreground rounded-full"
+                            style={{ width: `${skill.level}%` }}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Timeline */}
+              <div className="mt-12 pt-8 border-t border-border fade-in">
+                <h3 className="heading-sm mb-6">Timeline</h3>
+                <div>
+                  {timeline.map((item) => (
+                    <div key={item.period} className="timeline-item">
+                      <p className="text-sm text-muted-foreground font-mono mb-1">
+                        {item.period}
+                      </p>
+                      <h4 className="heading-sm mb-1">{item.role}</h4>
+                      <p className="text-sm text-accent mb-2">{item.company}</p>
+                      <p className="text-body">{item.description}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="section bg-background">
+        <div className="container">
+          <div className="max-w-2xl">
+            <p className="label fade-in">Let's Connect</p>
+            <h2 className="heading-lg mb-4 fade-in">Have a project in mind?</h2>
+            <p className="text-large mb-6 fade-in">
+              I'm always open to discussing new projects, creative ideas, or
+              opportunities to be part of your vision.
+            </p>
+            <p className="text-body mb-10 fade-in">
+              Whether you need a landing page, a web application, or want to discuss
+              how I can help bring your ideas to life—let's talk.
+            </p>
+
+            <a
+              href="mailto:sohelansarii@gmail.com"
+              className="btn-primary mb-6 fade-in"
+            >
+              sohelansarii@gmail.com <FaArrowRight size={16} />
+            </a>
+
+            <p className="text-sm text-muted-foreground mb-8 fade-in">
+              Or find me on
+            </p>
+
+            <div className="flex gap-6 fade-in">
+              <a
+                href={`https://github.com/${user.login}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 rounded-lg bg-surface border border-border flex items-center justify-center text-muted hover:text-foreground hover:border-foreground transition-all"
+              >
+                <FaGithub size={20} />
+              </a>
+              <a
+                href="https://linkedin.com/in/sohelansarii"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 rounded-lg bg-surface border border-border flex items-center justify-center text-muted hover:text-foreground hover:border-foreground transition-all"
+              >
+                <FaLinkedin size={20} />
+              </a>
+              <a
+                href="https://twitter.com/sohelansarii"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 rounded-lg bg-surface border border-border flex items-center justify-center text-muted hover:text-foreground hover:border-foreground transition-all"
+              >
+                <FaTwitter size={20} />
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="text-center py-6 text-gray-600 bg-gray-50">
-        © {new Date().getFullYear()}  {user ? user.name : "Sohel Ansari"}. All rights reserved.
+      <footer className="py-8 border-t border-border">
+        <div className="container">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-sm text-muted-foreground">
+              © {new Date().getFullYear()} {user.name}
+            </p>
+            <p className="text-sm text-muted-foreground font-mono">
+              Built with React + TypeScript
+            </p>
+          </div>
+        </div>
       </footer>
     </div>
   );
