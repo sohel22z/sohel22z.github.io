@@ -3,12 +3,13 @@ import {
   FaArrowRight,
   FaGithub,
   FaLinkedin,
-  FaTwitter,
   FaExternalLinkAlt,
   FaCode,
   FaLayerGroup,
-  FaRocket,
-  FaMapMarker,
+  FaToolbox,
+  FaDatabase,
+  FaCogs,
+  FaChartLine,
 } from "react-icons/fa";
 import "./index.css";
 
@@ -50,60 +51,86 @@ const defaultUser: GitHubUser = {
   public_repos: 15,
 };
 
-const services = [
+const techStack = [
   {
     icon: <FaCode size={24} />,
-    title: "Frontend Development",
-    description:
-      "Building responsive, accessible interfaces with React, TypeScript, and modern CSS. Clean code is my baseline.",
-    tags: ["React", "TypeScript", "TailwindCSS"],
+    title: "Frontend",
+    tags: ["ReactJS", "NextJS", "TypeScript", "HTML5", "CSS3", "JavaScript"],
   },
   {
     icon: <FaLayerGroup size={24} />,
-    title: "UI/UX Implementation",
-    description:
-      "Translating designs into pixel-perfect, interactive experiences. I pay attention to the details that matter.",
-    tags: ["Figma", "Accessibility", "Animation"],
+    title: "Styling",
+    tags: ["TailwindCSS", "Styled-Components", "Bootstrap", "Sass"],
   },
   {
-    icon: <FaRocket size={24} />,
-    title: "Performance & Optimization",
-    description:
-      "Making websites fast and smooth. Core Web Vitals aren't just metrics to me—they're requirements.",
-    tags: ["Core Web Vitals", "SEO", "Speed"],
+    icon: <FaToolbox size={24} />,
+    title: "State & Data",
+    tags: ["Redux Toolkit", "Context API", "React Query", "REST APIs"],
+  },
+  {
+    icon: <FaDatabase size={24} />,
+    title: "Performance",
+    tags: ["PWA", "Lazy Loading", "Code Splitting", "Lighthouse"],
+  },
+  {
+    icon: <FaCogs size={24} />,
+    title: "Tools",
+    tags: ["Git", "GitHub", "Bitbucket", "VS Code", "Agile/Scrum"],
+  },
+  {
+    icon: <FaChartLine size={24} />,
+    title: "Other",
+    tags: ["ChartJS", "Responsive Design", "Cross-Browser", "Figma"],
   },
 ];
 
 const timeline = [
   {
-    period: "2024 - Present",
-    role: "Frontend Developer",
-    company: "Learning & Building",
+    period: "Apr 2022 – Mar 2025",
+    role: "React Developer",
+    company: "Traveltekpro IT Solutions",
     description:
-      "Focused on React ecosystem, TypeScript, and building real-world projects. Expanding into full-stack development.",
+      "Enhanced frontend performance through code splitting and lazy loading, reducing load times by 35%. Collaborated with UX and backend teams to implement new features. Delivered 15+ web applications for diverse clients.",
   },
   {
-    period: "2023 - 2024",
-    role: "Started Development",
-    company: "Self-taught Journey",
+    period: "Apr 2025 – Present",
+    role: "Trainee Front-End Developer",
+    company: "Impero IT Services Pvt. Ltd.",
     description:
-      "Began with HTML, CSS, and JavaScript. Built first projects and fell in love with creating things for the web.",
+      "Developing and maintaining core modules for a travel booking platform using ReactJS and RESTful APIs.",
+  },
+  {
+    period: "Dec 2021 – Mar 2022",
+    role: "Front-End Developer",
+    company: "Impero IT Services Pvt. Ltd.",
+    description:
+      "Built responsive layouts and UI components in React. Learned fundamentals of state management, mobile-first design, and cross-browser compatibility.",
   },
 ];
 
 const skills = {
   frontend: [
-    { name: "React / Next.js", level: 92 },
-    { name: "TypeScript", level: 88 },
-    { name: "TailwindCSS", level: 90 },
-    { name: "JavaScript", level: 90 },
+    { name: "ReactJS / NextJS", level: 95 },
+    { name: "TypeScript", level: 90 },
+    { name: "TailwindCSS", level: 88 },
+    { name: "JavaScript (ES6+)", level: 92 },
+    { name: "Redux Toolkit", level: 85 },
   ],
   backend: [
-    { name: "Node.js", level: 55 },
-    { name: "PostgreSQL", level: 45 },
-    { name: "REST APIs", level: 60 },
+    { name: "Node.js", level: 60 },
+    { name: "Express.js", level: 55 },
+    { name: "MongoDB", level: 50 },
+    { name: "REST APIs", level: 70 },
   ],
 };
+
+const certifications = [
+  "One Million Prompters - DFF (2025)",
+  "React Native by Meta - Coursera (2024)",
+  "Advanced React by Meta - Coursera (2023)",
+  "JavaScript Algorithms - FreeCodeCamp (2023)",
+  "Responsive Web Design - FreeCodeCamp (2021)",
+];
 
 const defaultRepos: GitHubRepo[] = [
   {
@@ -173,21 +200,6 @@ const defaultRepos: GitHubRepo[] = [
     topics: ["javascript", "practice"],
   },
 ];
-
-function LiveTime() {
-  const [time, setTime] = useState(new Date());
-
-  useEffect(() => {
-    const timer = setInterval(() => setTime(new Date()), 1000);
-    return () => clearInterval(timer);
-  }, []);
-
-  return (
-    <span className="font-mono lowercase tracking-wider">
-      {time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })} local
-    </span>
-  );
-}
 
 export default function App() {
   const [user, setUser] = useState<GitHubUser>(defaultUser);
@@ -274,7 +286,7 @@ export default function App() {
 
   const navItems = [
     { id: "home", label: "Home" },
-    { id: "services", label: "Services" },
+    { id: "services", label: "Stack" },
     { id: "work", label: "Work" },
     { id: "about", label: "About" },
     { id: "contact", label: "Contact" },
@@ -351,361 +363,351 @@ export default function App() {
 
       {/* Hero Section */}
       <main>
-      <section id="home" className="min-h-screen flex items-center pt-16">
-        <div className="container">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            <div className="lg:col-span-7 order-2 lg:order-1">
-              <div className="label fade-in flex flex-wrap items-center gap-3 mb-4">
-                <span className="flex items-center gap-2">
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2" style={{ backgroundColor: '#10b981' }}></span>
-                  </span>
-                  Available for Projects
-                </span>
-                <span className="text-muted-foreground">|</span>
-                <LiveTime />
-              </div>
-              <h1 className="heading-xl mb-6 fade-in text-foreground" style={{ transitionDelay: "0.1s" }}>
-                I turn ideas
-                <br />
-                <span className="text-accent">into interfaces</span>
-                <br />
-                that users love.
-              </h1>
-              <h2
-                className="text-large mb-8 fade-in font-normal"
-                style={{ transitionDelay: "0.2s" }}
-              >
-                Frontend developer specializing in React & TypeScript. 
-                I build fast, accessible, and visually polished web applications 
-                that help businesses grow.
-              </h2>
-              <div
-                className="flex flex-wrap gap-4 fade-in"
-                style={{ transitionDelay: "0.3s" }}
-              >
-                <button onClick={() => scrollTo("work")} className="btn-primary">
-                  See My Work <FaArrowRight size={16} />
-                </button>
-                <button onClick={() => scrollTo("contact")} className="btn-secondary">
-                  Start a Project
-                </button>
-              </div>
+        <section id="home" className="min-h-screen flex items-center pt-16">
+          <div className="container">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+              <div className="lg:col-span-7 order-2 lg:order-1">
 
-              <div
-                className="flex gap-8 mt-12 pt-8 border-t border-border fade-in"
-                style={{ transitionDelay: "0.4s" }}
-              >
-                <div>
-                  <p className="stat-number">{user.public_repos}</p>
-                  <p className="text-sm mt-1">Projects</p>
+                <h1 className="heading-xl mb-6 fade-in text-foreground" style={{ transitionDelay: "0.1s" }}>
+                  I turn ideas
+                  <br />
+                  <span className="text-accent">into interfaces</span>
+                  <br />
+                  that users love.
+                </h1>
+                <h2
+                  className="text-large mb-8 fade-in font-normal"
+                  style={{ transitionDelay: "0.2s" }}
+                >
+                  Frontend developer specializing in React & TypeScript.
+                  I build fast, accessible, and visually polished web applications
+                  that help businesses grow.
+                </h2>
+                <div
+                  className="flex flex-wrap gap-4 fade-in"
+                  style={{ transitionDelay: "0.3s" }}
+                >
+                  <button onClick={() => scrollTo("work")} className="btn-primary">
+                    See My Work <FaArrowRight size={16} />
+                  </button>
+                  <button onClick={() => scrollTo("contact")} className="btn-secondary">
+                    Start a Project
+                  </button>
                 </div>
-                <div>
-                  <p className="stat-number">{user.followers}</p>
-                  <p className="text-sm mt-1">Followers</p>
-                </div>
-                <div>
-                  <p className="stat-number">2+</p>
-                  <p className="text-sm mt-1">Years</p>
-                </div>
-              </div>
-            </div>
 
-            <div className="lg:col-span-5 order-1 lg:order-2 flex justify-center lg:justify-end fade-in">
-              <a
-                href={user.html_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative block"
-              >
-                <img
-                  src={user.avatar_url}
-                  alt={`${user.name || "Sohel Ansari"} - Frontend Developer`}
-                  className="w-56 h-56 md:w-72 md:h-72 rounded-2xl object-cover"
-                  style={{ boxShadow: "0 8px 24px rgba(0, 0, 0, 0.08)" }}
-                />
-                <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-accent rounded-full flex items-center justify-center">
-                  <FaGithub className="text-white" size={18} />
-                </div>
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Services Section */}
-      <section id="services" className="section bg-surface">
-        <div className="container">
-          <div className="mb-12">
-            <p className="label fade-in">What I Do</p>
-            <h2 className="heading-lg fade-in">Services</h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {services.map((service, index) => (
-              <div
-                key={service.title}
-                className="card-service fade-in"
-                style={{ transitionDelay: `${index * 0.1}s` }}
-              >
-                <div className="w-12 h-12 rounded-lg bg-accent-light flex items-center justify-center text-accent mb-5">
-                  {service.icon}
-                </div>
-                <h3 className="heading-md mb-3">{service.title}</h3>
-                <p className="text-body mb-5">{service.description}</p>
-                <div className="flex flex-wrap gap-2">
-                  {service.tags.map((tag) => (
-                    <span key={tag} className="skill-tag">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Work Section */}
-      <section id="work" className="section bg-background">
-        <div className="container">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
-            <div>
-              <p className="label fade-in">Portfolio</p>
-              <h2 className="heading-lg fade-in">Selected Work</h2>
-            </div>
-            <a
-              href={`https://github.com/${user.login}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-text fade-in"
-            >
-              View GitHub <FaExternalLinkAlt size={14} />
-            </a>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {repos.slice(0, 6).map((repo, index) => (
-              <a
-                key={repo.id}
-                href={repo.html_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="card fade-in group"
-                style={{ transitionDelay: `${index * 0.08}s` }}
-              >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="w-10 h-10 rounded-lg bg-hover flex items-center justify-center group-hover:bg-accent-light group-hover:text-accent transition-colors">
-                    <FaGithub size={18} />
+                <div
+                  className="flex gap-8 mt-12 pt-8 border-t border-border fade-in"
+                  style={{ transitionDelay: "0.4s" }}
+                >
+                  <div>
+                    <p className="stat-number">{user.public_repos}</p>
+                    <p className="text-sm mt-1">Projects</p>
                   </div>
-                  <div className="flex gap-4 text-muted-foreground text-sm font-mono">
-                    <span>{repo.stargazers_count} ★</span>
-                    <span>{repo.forks_count}</span>
+                  <div>
+                    <p className="stat-number">{user.followers}</p>
+                    <p className="text-sm mt-1">Followers</p>
+                  </div>
+                  <div>
+                    <p className="stat-number">3+</p>
+                    <p className="text-sm mt-1">Years</p>
                   </div>
                 </div>
-
-                <h3 className="heading-md mb-2 group-hover:text-accent transition-colors">
-                  {repo.name}
-                </h3>
-                <p className="text-body mb-4 line-clamp-2">
-                  {repo.description || "View project on GitHub"}
-                </p>
-
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {repo.language && (
-                    <span className="skill-tag skill-tag-accent">{repo.language}</span>
-                  )}
-                  {repo.topics?.slice(0, 2).map((topic) => (
-                    <span key={topic} className="skill-tag">
-                      {topic}
-                    </span>
-                  ))}
-                </div>
-
-                {repo.homepage && (
-                  <div className="pt-4 border-t border-border">
-                    <span className="text-sm font-medium text-accent flex items-center gap-1">
-                      Live Demo <FaExternalLinkAlt size={12} />
-                    </span>
-                  </div>
-                )}
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* About Section */}
-      <section id="about" className="section bg-surface">
-        <div className="container">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-            <div className="lg:col-span-5">
-              <p className="label fade-in">The Story</p>
-              <h2 className="heading-lg mb-6 fade-in">Who I Am</h2>
-              <div className="space-y-4 fade-in">
-                <p className="text-large">
-                  I'm a frontend developer who believes great software starts with great interfaces.
-                </p>
-                <p className="text-body">
-                  My journey began with curiosity about how websites work. That curiosity grew into 
-                  a passion for building them. Today, I specialize in React and TypeScript, 
-                  crafting applications that are fast, accessible, and easy to use.
-                </p>
-                <p className="text-body">
-                  Beyond frontend, I'm expanding into full-stack development—learning how to 
-                  build complete solutions. From database design to API development, I'm 
-                  committed to understanding the entire picture.
-                </p>
-                <p className="text-body">
-                  When I'm not coding, you'll find me exploring new technologies, contributing 
-                  to open source, or sharing what I've learned with the community.
-                </p>
               </div>
 
-              <div className="grid grid-cols-3 gap-4 mt-10 pt-8 border-t border-border fade-in">
-                <div>
-                  <p className="stat-number">{user.public_repos}</p>
-                  <p className="text-sm mt-1">Projects</p>
-                </div>
-                <div>
-                  <p className="stat-number">2+</p>
-                  <p className="text-sm mt-1">Years</p>
-                </div>
-                <div>
-                  <p className="stat-number">100%</p>
-                  <p className="text-sm mt-1">Dedication</p>
-                </div>
+              <div className="lg:col-span-5 order-1 lg:order-2 flex justify-center lg:justify-end fade-in">
+                <a
+                  href={user.html_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative block"
+                >
+                  <img
+                    src={user.avatar_url}
+                    alt={`${user.name || "Sohel Ansari"} - Frontend Developer`}
+                    className="w-56 h-56 md:w-72 md:h-72 rounded-2xl object-cover"
+                    style={{ boxShadow: "0 8px 24px rgba(0, 0, 0, 0.08)" }}
+                  />
+                  <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-accent rounded-full flex items-center justify-center">
+                    <FaGithub className="text-white" size={18} />
+                  </div>
+                </a>
               </div>
             </div>
+          </div>
+        </section>
 
-            <div className="lg:col-span-1" />
+        {/* Tech Stack Section */}
+        <section id="services" className="section bg-surface">
+          <div className="container">
+            <div className="mb-12">
+              <p className="label fade-in">What I Use</p>
+              <h2 className="heading-lg fade-in">Tech Stack</h2>
+            </div>
 
-            <div className="lg:col-span-6">
-              <p className="label fade-in">Skills</p>
-
-              <div className="space-y-8 fade-in">
-                <div>
-                  <h3 className="heading-sm mb-5">Frontend</h3>
-                  <div className="space-y-4">
-                    {skills.frontend.map((skill) => (
-                      <div key={skill.name}>
-                        <div className="flex justify-between mb-2">
-                          <span className="text-sm font-medium">{skill.name}</span>
-                          <span className="text-sm text-muted-foreground font-mono">
-                            {skill.level}%
-                          </span>
-                        </div>
-                        <div className="h-2 bg-border rounded-full overflow-hidden">
-                          <div
-                            className="h-full bg-foreground rounded-full"
-                            style={{ width: `${skill.level}%` }}
-                          />
-                        </div>
-                      </div>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+              {techStack.map((item, index) => (
+                <div
+                  key={item.title}
+                  className="card-stack fade-in p-6"
+                  style={{ transitionDelay: `${index * 0.1}s` }}
+                >
+                  <div className="w-10 h-10 rounded-lg bg-accent-light flex items-center justify-center text-accent mb-6">
+                    {item.icon}
+                  </div>
+                  <h3 className="heading-sm mb-4 uppercase tracking-tighter opacity-60">{item.title}</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {item.tags.map((tag) => (
+                      <span key={tag} className="skill-tag">
+                        {tag}
+                      </span>
                     ))}
                   </div>
                 </div>
-
-                <div>
-                  <h3 className="heading-sm mb-5">Backend (Learning)</h3>
-                  <div className="space-y-4">
-                    {skills.backend.map((skill) => (
-                      <div key={skill.name}>
-                        <div className="flex justify-between mb-2">
-                          <span className="text-sm font-medium">{skill.name}</span>
-                          <span className="text-sm text-muted-foreground font-mono">
-                            {skill.level}%
-                          </span>
-                        </div>
-                        <div className="h-2 bg-border rounded-full overflow-hidden">
-                          <div
-                            className="h-full bg-muted-foreground rounded-full"
-                            style={{ width: `${skill.level}%` }}
-                          />
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Timeline */}
-              <div className="mt-12 pt-8 border-t border-border fade-in">
-                <h3 className="heading-sm mb-6">Timeline</h3>
-                <div>
-                  {timeline.map((item) => (
-                    <div key={item.period} className="timeline-item">
-                      <p className="text-sm text-muted-foreground font-mono mb-1">
-                        {item.period}
-                      </p>
-                      <h4 className="heading-sm mb-1">{item.role}</h4>
-                      <p className="text-sm text-accent mb-2">{item.company}</p>
-                      <p className="text-body">{item.description}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              ))}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="section bg-background">
-        <div className="container">
-          <div className="max-w-2xl">
-            <p className="label fade-in">Let's Connect</p>
-            <h2 className="heading-lg mb-4 fade-in">Have a project in mind?</h2>
-            <p className="text-large mb-6 fade-in">
-              I'm always open to discussing new projects, creative ideas, or
-              opportunities to be part of your vision.
-            </p>
-            <p className="text-body mb-10 fade-in">
-              Whether you need a landing page, a web application, or want to discuss
-              how I can help bring your ideas to life—let's talk.
-            </p>
-
-            <a
-              href="mailto:sohelansarii@gmail.com"
-              className="btn-primary mb-6 fade-in"
-            >
-              sohelansarii@gmail.com <FaArrowRight size={16} />
-            </a>
-
-            <p className="text-sm text-muted-foreground mb-8 fade-in">
-              Or find me on
-            </p>
-
-            <div className="flex gap-6 fade-in">
+        {/* Work Section */}
+        <section id="work" className="section bg-background">
+          <div className="container">
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+              <div>
+                <p className="label fade-in">Portfolio</p>
+                <h2 className="heading-lg fade-in">Selected Work</h2>
+              </div>
               <a
                 href={`https://github.com/${user.login}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 rounded-lg bg-surface border border-border flex items-center justify-center text-muted hover:text-foreground hover:border-foreground transition-all"
+                className="btn-text fade-in"
               >
-                <FaGithub size={20} />
-              </a>
-              <a
-                href="https://linkedin.com/in/sohelansarii"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-12 h-12 rounded-lg bg-surface border border-border flex items-center justify-center text-muted hover:text-foreground hover:border-foreground transition-all"
-              >
-                <FaLinkedin size={20} />
-              </a>
-              <a
-                href="https://twitter.com/sohelansarii"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-12 h-12 rounded-lg bg-surface border border-border flex items-center justify-center text-muted hover:text-foreground hover:border-foreground transition-all"
-              >
-                <FaTwitter size={20} />
+                View GitHub <FaExternalLinkAlt size={14} />
               </a>
             </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {repos.slice(0, 6).map((repo, index) => (
+                <a
+                  key={repo.id}
+                  href={repo.html_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="card fade-in group"
+                  style={{ transitionDelay: `${index * 0.08}s` }}
+                >
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="w-10 h-10 rounded-lg bg-hover flex items-center justify-center group-hover:bg-accent-light group-hover:text-accent transition-colors">
+                      <FaGithub size={18} />
+                    </div>
+                    <div className="flex gap-4 text-muted-foreground text-sm font-mono">
+                      <span>{repo.stargazers_count} ★</span>
+                      <span>{repo.forks_count}</span>
+                    </div>
+                  </div>
+
+                  <h3 className="heading-md mb-2 group-hover:text-accent transition-colors">
+                    {repo.name}
+                  </h3>
+                  <p className="text-body mb-4 line-clamp-2">
+                    {repo.description || "View project on GitHub"}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {repo.language && (
+                      <span className="skill-tag skill-tag-accent">{repo.language}</span>
+                    )}
+                    {repo.topics?.slice(0, 2).map((topic) => (
+                      <span key={topic} className="skill-tag">
+                        {topic}
+                      </span>
+                    ))}
+                  </div>
+
+                  {repo.homepage && (
+                    <div className="pt-4 border-t border-border">
+                      <span className="text-sm font-medium text-accent flex items-center gap-1">
+                        Live Demo <FaExternalLinkAlt size={12} />
+                      </span>
+                    </div>
+                  )}
+                </a>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+
+        {/* About Section */}
+        <section id="about" className="section bg-surface">
+          <div className="container">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+              <div className="lg:col-span-5">
+                <p className="label fade-in">Background</p>
+                <h2 className="heading-lg mb-6 fade-in">About Me</h2>
+                <div className="space-y-4 fade-in">
+                  <p className="text-large">
+                    Results-driven React Developer with 3+ years of experience building high-performance web applications.
+                  </p>
+                  <p className="text-body">
+                    Currently working at Traveltekpro IT Solutions where I've enhanced frontend performance, reducing load times by 35%. 
+                    Previously at Impero IT Services, I built responsive layouts and UI components for travel booking platforms.
+                  </p>
+                  <p className="text-body">
+                    My expertise spans ReactJS, Redux, TypeScript, and modern frontend practices. I'm passionate about clean code, 
+                    collaborative workflows, and mentoring junior developers.
+                  </p>
+                  <p className="text-body">
+                    When not coding, I'm earning certifications to stay current with modern technologies and best practices.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-3 gap-4 mt-10 pt-8 border-t border-border fade-in">
+                  <div>
+                    <p className="stat-number">3+</p>
+                    <p className="text-sm mt-1">Years</p>
+                  </div>
+                  <div>
+                    <p className="stat-number">15+</p>
+                    <p className="text-sm mt-1">Projects</p>
+                  </div>
+                  <div>
+                    <p className="stat-number">5</p>
+                    <p className="text-sm mt-1">Certifications</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="lg:col-span-1" />
+
+              <div className="lg:col-span-6">
+                <p className="label fade-in">Skills</p>
+
+                <div className="space-y-8 fade-in">
+                  <div>
+                    <h3 className="heading-sm mb-5">Frontend</h3>
+                    <div className="space-y-4">
+                      {skills.frontend.map((skill) => (
+                        <div key={skill.name}>
+                          <div className="flex justify-between mb-2">
+                            <span className="text-sm font-medium">{skill.name}</span>
+                            <span className="text-sm text-muted-foreground font-mono">
+                              {skill.level}%
+                            </span>
+                          </div>
+                          <div className="h-2 bg-border rounded-full overflow-hidden">
+                            <div
+                              className="h-full bg-foreground rounded-full"
+                              style={{ width: `${skill.level}%` }}
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <h3 className="heading-sm mb-5">Backend (Learning)</h3>
+                    <div className="space-y-4">
+                      {skills.backend.map((skill) => (
+                        <div key={skill.name}>
+                          <div className="flex justify-between mb-2">
+                            <span className="text-sm font-medium">{skill.name}</span>
+                            <span className="text-sm text-muted-foreground font-mono">
+                              {skill.level}%
+                            </span>
+                          </div>
+                          <div className="h-2 bg-border rounded-full overflow-hidden">
+                            <div
+                              className="h-full bg-muted-foreground rounded-full"
+                              style={{ width: `${skill.level}%` }}
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Timeline */}
+                <div className="mt-12 pt-8 border-t border-border fade-in">
+                  <h3 className="heading-sm mb-6">Experience</h3>
+                  <div>
+                    {timeline.map((item) => (
+                      <div key={item.period} className="timeline-item">
+                        <p className="text-sm text-muted-foreground font-mono mb-1">
+                          {item.period}
+                        </p>
+                        <h4 className="heading-sm mb-1">{item.role}</h4>
+                        <p className="text-sm text-accent mb-2">{item.company}</p>
+                        <p className="text-body">{item.description}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Certifications */}
+                <div className="mt-12 pt-8 border-t border-border fade-in">
+                  <h3 className="heading-sm mb-6">Certifications</h3>
+                  <div className="flex flex-wrap gap-3">
+                    {certifications.map((cert, index) => (
+                      <span key={index} className="skill-tag skill-tag-accent">
+                        {cert}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Contact Section */}
+        <section id="contact" className="section bg-background">
+          <div className="container">
+            <div className="max-w-2xl">
+              <p className="label fade-in">Let's Connect</p>
+              <h2 className="heading-lg mb-4 fade-in">Have a project in mind?</h2>
+              <p className="text-large mb-6 fade-in">
+                I'm always open to discussing new projects, creative ideas, or
+                opportunities to be part of your vision.
+              </p>
+              <p className="text-body mb-10 fade-in">
+                Whether you need a landing page, a web application, or want to discuss
+                how I can help bring your ideas to life—let's talk.
+              </p>
+
+              <a
+                href="mailto:sohelansarii@outlook.com"
+                className="btn-primary mb-6 fade-in"
+              >
+                sohelansarii@outlook.com <FaArrowRight size={16} />
+              </a>
+
+              <p className="text-sm text-muted-foreground mb-8 fade-in">
+                Or find me on
+              </p>
+
+              <div className="flex gap-6 fade-in">
+                <a
+                  href={`https://github.com/${user.login}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 rounded-lg bg-surface border border-border flex items-center justify-center text-muted hover:text-foreground hover:border-foreground transition-all"
+                >
+                  <FaGithub size={20} />
+                </a>
+                <a
+                  href="https://linkedin.com/in/sohelansarii"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 rounded-lg bg-surface border border-border flex items-center justify-center text-muted hover:text-foreground hover:border-foreground transition-all"
+                >
+                  <FaLinkedin size={20} />
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
 
       {/* Footer */}
@@ -716,10 +718,10 @@ export default function App() {
               © {new Date().getFullYear()} {user.name}
             </p>
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-              <img 
-                src={`https://komarev.com/ghpvc/?username=${user.login}&label=Profile%20Views&color=dc2626&style=flat-square`} 
-                alt="Profile Views" 
-                className="opacity-70 hover:opacity-100 transition-opacity h-5" 
+              <img
+                src={`https://komarev.com/ghpvc/?username=${user.login}&label=Profile%20Views&color=dc2626&style=flat-square`}
+                alt="Profile Views"
+                className="opacity-70 hover:opacity-100 transition-opacity h-5"
               />
               <p className="text-sm text-muted-foreground font-mono">
                 Built with React + TypeScript
