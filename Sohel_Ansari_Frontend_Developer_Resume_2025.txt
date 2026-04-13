@@ -1,0 +1,172 @@
+Sohel Ansari
+
+​
+
+Frontend Developer - linkedin/sohelansarii | github/sohel22z​
+
+Location: Ahmedabad, India
+Email: sohelansarii@outlook.com
+Mobile: +91-8140214807
+
+Professional Summary​
+​
+
+Results-driven React Developer with 3+ years of experience building high-performance web
+applications. Proven expertise in ReactJS, Redux, and PWAs, with a track record of improving user
+retention by 20% and page load times by 40%. Passionate about clean code, collaborative
+workflows, and mentoring junior developers.
+
+Technical Skills​
+​
+
+Frontend: ReactJS, NextJS, TypeScript, HTML5, CSS3, JavaScript (ES6+)
+Styling: TailwindCSS, Styled-Components, Bootstrap, Sass
+State Management: Redux Toolkit (RTK), Context API, React Query
+Performance & UX: PWA, Lazy Loading, Code Splitting, Lighthouse Optimization
+Testing & Tools: Git, GitHub, Bitbucket, VS Code, React DevTools
+Backend (Learning): Node.js, Express.js, MongoDB, REST APIs
+Other: ChartJS, Responsive Design, Cross-Browser Compatibility, Agile/Scrum
+
+Professional Experience​
+​
+
+React Developer | Traveltekpro IT Solutions ​
+•​
+
+•​
+
+•​
+
+•​
+
+•​
+
+•​
+
+Enhanced frontend performance through code splitting, lazy loading, and optimized
+state management, reducing load times by 35%.
+Collaborate with UX and backend teams to implement new features, ensuring smooth user
+flows and pixel-perfect interfaces.
+Contribute to Agile sprints, code reviews, and CI/CD pipelines, improving team delivery
+efficiency.
+
+•​
+
+​
+
+(Apr 2022 – Mar 2025)
+
+Delivered 15+ web applications for diverse clients using ReactJS and modern frontend
+practices.
+Improved mobile responsiveness and accessibility, raising Lighthouse performance scores by
+30%.
+Optimized asset delivery using WebP compression and lazy loading, significantly improving
+TTFB and Core Web Vitals.
+
+Trainee Front-End Developer | Impero IT Services Pvt. Ltd.​
+•​
+
+(Apr 2025 – Present)
+
+Developing and maintaining core modules for a travel booking platform (flights and
+hotels) using ReactJS and RESTful APIs.
+
+Front-End Developer | Impero IT Services Pvt. Ltd.​
+•​
+
+​
+
+​
+
+(Dec 2021 – Mar 2022)
+
+Built responsive layouts and UI components in React under mentorship.
+Learned and applied fundamentals of state management, mobile-first design, and
+cross-browser compatibility.
+
+Key Projects​
+​
+
+Communify.AI​
+•​
+
+•​
+
+React, Redux, Bootstrap, Slack, GitHub​
+
+Live URL
+
+Built a Progressive Web App (PWA) with offline support, increasing mobile user retention by
+20%.
+Automated CI/CD workflows using GitHub Actions, reducing release deployment time by 30%.
+
+uWorld Suite​
+•​
+
+•​
+•​
+
+Vite (React), Redux, Bootstrap, ChartJS, Bitbucket​
+
+Live URL
+
+Designed and implemented a white-label UI system with dynamic theming for multiple
+client brands.
+Created interactive data visualization dashboards using ChartJS.
+Applied advanced optimizations to achieve 35% faster load times and smoother user
+interactions.
+
+Personal Learning Projects​
+​
+
+GitSense AI​
+•​
+
+•​
+
+•​
+
+Next.js, TypeScript, TailwindCSS, ChartJS, GitHub API​
+
+Live URL
+
+Developed a developer analytics dashboard that visualizes GitHub repository metrics such as
+commits, stars, pull requests, and contribution trends.
+Implemented client-side caching and pagination for faster data loading and reduced API
+overhead.
+Focused on improving data visualization and API integration skills, aligning with
+product-focused frontend development best practices.
+
+Certifications​
+​
+
+•​
+
+One Million Prompters - DFF (2025) >> Certificate of Completion
+
+•​
+
+React Native by Meta - Coursera (2024) >> Certificate of Completion
+
+•​
+
+Advanced React by Meta - Coursera (2023) >> Certificate of Completion
+
+•​
+
+•​
+
+Javascript Algorithms and Data Structures - FreeCodeCamp (2023) >> Certificate of
+Completion
+Responsive Web Design - FreeCodeCamp (2021) >> Certificate of Completion
+
+Education​
+​
+
+Gujarat University​
+Bachelor of Commerce - Advanced Accounting and Statistics​
+
+Ahmedabad, Gujarat, India
+Jul 2017 – Aug 2020
+
+
