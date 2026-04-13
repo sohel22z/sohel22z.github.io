@@ -175,14 +175,14 @@
   }
 
   .heading-sm {
-    font-size: 0.875rem;
+    font-size: 1rem;
     font-weight: 600;
     letter-spacing: 0.02em;
   }
 
   @media (min-width: 768px) {
     .heading-sm {
-      font-size: 0.875rem;
+      font-size: 1rem;
     }
   }
 
@@ -245,10 +245,10 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    padding: 0.875rem 1.5rem;
+    padding: 1rem 1.5rem;
     background: var(--color-foreground);
     color: var(--color-background);
-    font-size: 0.9375rem;
+    font-size: 1rem;
     font-weight: 600;
     border-radius: 0.375rem;
     transition: all 0.25s ease;
@@ -258,8 +258,8 @@
 
   @media (min-width: 768px) {
     .btn-primary {
-      padding: 1rem 1.75rem;
-      font-size: 0.875rem;
+      padding: 1rem 1.5rem;
+      font-size: 1rem;
     }
   }
 
@@ -273,10 +273,10 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    padding: 0.875rem 1.5rem;
+    padding: 1rem 1.5rem;
     background: transparent;
     color: var(--color-foreground);
-    font-size: 0.9375rem;
+    font-size: 1rem;
     font-weight: 600;
     border: 1px solid var(--color-border);
     border-radius: 0.375rem;
@@ -287,8 +287,8 @@
 
   @media (min-width: 768px) {
     .btn-secondary {
-      padding: 1rem 1.75rem;
-      font-size: 0.875rem;
+      padding: 1rem 1.5rem;
+      font-size: 1rem;
     }
   }
 
@@ -302,7 +302,7 @@
     display: inline-flex;
     align-items: center;
     gap: 0.375rem;
-    font-size: 0.9375rem;
+    font-size: 1rem;
     font-weight: 600;
     color: var(--color-foreground);
     transition: gap 0.2s ease;
@@ -310,7 +310,7 @@
 
   @media (min-width: 768px) {
     .btn-text {
-      font-size: 0.875rem;
+      font-size: 1rem;
     }
   }
 
@@ -322,13 +322,13 @@
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: 0.75rem;
-    padding: 1.25rem;
+    padding: 1.5rem;
     transition: all 0.3s ease;
   }
 
   @media (min-width: 768px) {
     .card {
-      padding: 1.75rem;
+      padding: 2rem;
       border-radius: 1rem;
     }
   }

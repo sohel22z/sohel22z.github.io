@@ -174,6 +174,21 @@ const defaultRepos: GitHubRepo[] = [
   },
 ];
 
+function LiveTime() {
+  const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => setTime(new Date()), 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <span className="font-mono lowercase tracking-wider">
+      {time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })} local
+    </span>
+  );
+}
+
 export default function App() {
   const [user, setUser] = useState<GitHubUser>(defaultUser);
   const [repos, setRepos] = useState<GitHubRepo[]>(defaultRepos);
@@ -335,16 +350,22 @@ export default function App() {
       </nav>
 
       {/* Hero Section */}
+      <main>
       <section id="home" className="min-h-screen flex items-center pt-16">
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             <div className="lg:col-span-7 order-2 lg:order-1">
-              <p className="label fade-in">
+              <div className="label fade-in flex flex-wrap items-center gap-3 mb-4">
                 <span className="flex items-center gap-2">
-                  <FaMapMarker size={12} />
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2" style={{ backgroundColor: '#10b981' }}></span>
+                  </span>
                   Available for Projects
                 </span>
-              </p>
+                <span className="text-muted-foreground">|</span>
+                <LiveTime />
+              </div>
               <h1 className="heading-xl mb-6 fade-in text-foreground" style={{ transitionDelay: "0.1s" }}>
                 I turn ideas
                 <br />
@@ -352,14 +373,14 @@ export default function App() {
                 <br />
                 that users love.
               </h1>
-              <p
-                className="text-large mb-8 fade-in"
+              <h2
+                className="text-large mb-8 fade-in font-normal"
                 style={{ transitionDelay: "0.2s" }}
               >
                 Frontend developer specializing in React & TypeScript. 
                 I build fast, accessible, and visually polished web applications 
                 that help businesses grow.
-              </p>
+              </h2>
               <div
                 className="flex flex-wrap gap-4 fade-in"
                 style={{ transitionDelay: "0.3s" }}
@@ -400,7 +421,7 @@ export default function App() {
               >
                 <img
                   src={user.avatar_url}
-                  alt={user.name || ""}
+                  alt={`${user.name || "Sohel Ansari"} - Frontend Developer`}
                   className="w-56 h-56 md:w-72 md:h-72 rounded-2xl object-cover"
                   style={{ boxShadow: "0 8px 24px rgba(0, 0, 0, 0.08)" }}
                 />
@@ -685,6 +706,7 @@ export default function App() {
           </div>
         </div>
       </section>
+      </main>
 
       {/* Footer */}
       <footer className="py-8 border-t border-border">
@@ -693,9 +715,16 @@ export default function App() {
             <p className="text-sm text-muted-foreground">
               © {new Date().getFullYear()} {user.name}
             </p>
-            <p className="text-sm text-muted-foreground font-mono">
-              Built with React + TypeScript
-            </p>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+              <img 
+                src={`https://komarev.com/ghpvc/?username=${user.login}&label=Profile%20Views&color=dc2626&style=flat-square`} 
+                alt="Profile Views" 
+                className="opacity-70 hover:opacity-100 transition-opacity h-5" 
+              />
+              <p className="text-sm text-muted-foreground font-mono">
+                Built with React + TypeScript
+              </p>
+            </div>
           </div>
         </div>
       </footer>
