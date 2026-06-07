@@ -137,3 +137,9 @@ dist
 .agent/
 .DS_Store
 public/Sohel_Ansari_Frontend_Developer_Resume_2025.txt
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
