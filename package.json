@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d out"
+    "deploy": "touch out/.nojekyll && gh-pages -d out -t"
   },
   "dependencies": {
     "framer-motion": "^12.15.0",
