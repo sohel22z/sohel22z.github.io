@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches: [master]
 
 jobs:
   build:
@@ -19,13 +19,11 @@ jobs:
       - name: Install deps
         run: npm install
 
-      - name: Build with secret
-        env:
-          VITE_MY_SECRET: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build project
         run: npm run build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          publish_dir: ./out
