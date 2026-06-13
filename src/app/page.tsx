@@ -449,7 +449,7 @@ export default function HomePage() {
                       width={320}
                       height={320}
                       fetchPriority="high"
-                      className="w-full h-full object-cover grayscale contrast-115 group-hover:grayscale-0 transition-all duration-300"
+                      className="w-full h-full object-cover contrast-115 transition-all duration-300"
                     />
                     <div className="absolute bottom-2 left-2 bg-black/80 px-2 py-0.5 border border-border/20 text-[10px] font-mono text-accent uppercase tracking-wider">
                       {user.login}
@@ -996,12 +996,12 @@ export default function HomePage() {
             
             <div className="flex items-center gap-6">
               <img
-                src={`https://komarev.com/ghpvc/?username=${user.login}&label=CONSOLE_VIEWS&color=ccff00&style=flat-square`}
+                src={`https://komarev.com/ghpvc/?username=${user.login}&label=CONSOLE_VIEWS&color=ff0000&style=flat-square`}
                 alt="Profile Views"
                 width={140}
                 height={20}
                 loading="lazy"
-                className="opacity-60 hover:opacity-100 transition-opacity h-5"
+                className="opacity-100 transition-opacity h-5"
               />
               <button
                 onClick={() => scrollTo("home")}
