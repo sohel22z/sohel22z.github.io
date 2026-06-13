@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef, useCallback } from "react";
-import { motion, useInView, AnimatePresence, PanInfo, useReducedMotion } from "framer-motion";
+import { motion, useInView, AnimatePresence, useReducedMotion } from "framer-motion";
 import {
   FaArrowRight,
   FaGithub,
@@ -188,17 +188,6 @@ export default function HomePage() {
   const shouldReduceMotion = useReducedMotion();
   
   const email = "sohelansarii@outlook.com";
-  const deskRef = useRef<HTMLDivElement>(null);
-  const dropZoneRef = useRef<HTMLDivElement>(null);
-  const [isOverDropZone, setIsOverDropZone] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -243,30 +232,6 @@ export default function HomePage() {
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
   }, []);
-
-  const handleDragEnd = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
-    setIsOverDropZone(false);
-    if (dropZoneRef.current) {
-      const rect = dropZoneRef.current.getBoundingClientRect();
-      const x = info.point.x;
-      const y = info.point.y;
-      
-      if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
-        copyEmail();
-      }
-    }
-  };
-
-  const handleDrag = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
-    if (dropZoneRef.current) {
-      const rect = dropZoneRef.current.getBoundingClientRect();
-      const x = info.point.x;
-      const y = info.point.y;
-      
-      const isOver = x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom;
-      setIsOverDropZone(isOver);
-    }
-  };
 
   const scrollTo = useCallback((id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -372,16 +337,13 @@ export default function HomePage() {
         <section id="home" className="relative min-h-screen flex items-center pt-24 md:pt-32 tech-grid border-b border-border">
         <div className="container w-full relative z-10 py-12">
           
-          {/* Background watermark text */}
-          <div className="absolute right-0 top-1/4 -translate-y-1/2 font-mono text-[10vw] font-black text-border/10 select-none pointer-events-none hidden lg:block uppercase tracking-wider">
-            FRONTEND
-          </div>
+          {/* Background watermark text removed */}
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             <div className="lg:col-span-8 space-y-8">
               
               <Reveal>
-                <span className="label">PORTFOLIO V2026 // SPECS</span>
+                <span className="label">PORTFOLIO V2026</span>
               </Reveal>
 
               <Reveal delay={0.05}>
@@ -427,19 +389,14 @@ export default function HomePage() {
               </Reveal>
             </div>
 
-            {/* Overlapping, Draggable ID Card on Desktop */}
+            {/* ID Card on Desktop */}
             <div className="lg:col-span-4 flex justify-center lg:justify-end">
               <Reveal delay={0.1}>
                 <motion.div
-                  drag={!isMobile}
-                  dragConstraints={{ left: -100, right: 100, top: -50, bottom: 100 }}
-                  dragElastic={0.05}
-                  whileDrag={{ scale: 1.03, zIndex: 30 }}
-                  className={`w-72 md:w-80 brutalist-card bg-surface p-6 space-y-6 border-2 border-border ${!isMobile ? "cursor-grab active:cursor-grabbing" : ""}`}
+                  className="w-72 md:w-80 brutalist-card bg-surface p-6 space-y-6 border-2 border-border"
                 >
                   <div className="flex justify-between items-center border-b border-border pb-4">
                     <span className="font-mono text-xs font-bold text-accent tracking-widest">ID CARD // REQ: 2026</span>
-                    <div className="w-2.5 h-2.5 rounded-full bg-accent animate-pulse" />
                   </div>
 
                   <div className="relative aspect-square w-full border border-border bg-black overflow-hidden group">
@@ -476,11 +433,6 @@ export default function HomePage() {
                     </div>
                   </div>
                   
-                  <div className="border-t border-dashed border-border pt-4 text-center">
-                    <span className="font-mono text-[9px] text-subtle tracking-widest block uppercase">
-                      * DRAG AND ROTATE ME AT WILL *
-                    </span>
-                  </div>
                 </motion.div>
               </Reveal>
             </div>
@@ -735,53 +687,26 @@ export default function HomePage() {
       {/* Contact: Redesigned as the Connect Desk draggable interface */}
       <section id="contact" className="section bg-surface relative overflow-hidden tech-grid">
         <div className="container relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
                  {/* Explanatory text */}
             <div className="lg:col-span-4 space-y-6">
               <Reveal>
-                <span className="label">CONNECT_INTERFACE // DRAG_AND_DROP</span>
+                <span className="label">CONNECT INTERFACE</span>
                 <h2 className="heading-lg mt-3">Connect Desk</h2>
                 <p className="text-body font-mono text-sm leading-relaxed mt-4">
-                  {isMobile
-                    ? "Click or tap the index cards below to copy details, view source repositories, connect on socials, or schedule consultations."
-                    : "Drag and drop the index cards on the desktop desk canvas to verify and copy details, or click on a card to navigate instantly."}
-                </p>
-                <p className="text-xs text-muted font-sans">
-                  The desk is physics-interactive. {isMobile ? "Interact with each node below." : "Grab the edges, drop them in targets, or click to proceed directly to communication nodes."}
+                  Interact with the index cards below to copy details, view source repositories, connect on socials, or schedule consultations.
                 </p>
               </Reveal>
-
-              {!isMobile && (
-                <Reveal delay={0.1}>
-                  {/* Drop Zone target */}
-                  <div
-                    ref={dropZoneRef}
-                    className={`border-2 border-dashed p-6 text-center font-mono text-xs transition-all duration-200 uppercase ${
-                      isOverDropZone 
-                        ? "border-accent bg-accent-light/10 text-accent scale-[1.02]" 
-                        : "border-border bg-surface-alt/40 text-muted"
-                    }`}
-                  >
-                    <div className="flex flex-col items-center gap-2">
-                      <FaHandPointer className={`animate-bounce text-base ${isOverDropZone ? "text-accent" : "text-muted"}`} aria-hidden="true" />
-                      <span>Drop Email Card Here</span>
-                      <span className="text-[10px] text-subtle font-sans font-light block">to auto-copy address</span>
-                    </div>
-                  </div>
-                </Reveal>
-              )}
             </div>
 
             {/* Canvas / Mobile grid */}
             <div className="lg:col-span-8">
               <Reveal delay={0.15}>
-                {isMobile ? (
-                  /* Mobile Stack Layout: Clean 2-column or 1-column grid */
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {/* Card 1: Email Card */}
                     <div className="brutalist-card bg-surface border-2 border-border p-5 text-left space-y-3">
                       <div className="flex justify-between items-center border-b border-border pb-2">
-                        <span className="font-mono text-[10px] text-accent tracking-widest font-black uppercase">PASS // EMAIL_NODE</span>
+                        <span className="font-mono text-[10px] text-accent tracking-widest font-black uppercase">PASS // EMAIL NODE</span>
                         <div className="w-2 h-2 rounded-full bg-accent" />
                       </div>
                       <div className="space-y-1">
@@ -853,130 +778,7 @@ export default function HomePage() {
                       </a>
                     </div>
                   </div>
-                ) : (
-                  /* Desktop Draggable Layout */
-                  <div
-                    ref={deskRef}
-                    className="relative h-[450px] w-full border-2 border-border bg-bg/90 overflow-hidden"
-                  >
-                    {/* Grid canvas background indicators */}
-                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none opacity-[0.02] font-mono text-5xl">
-                      DESK_CANVAS
-                    </div>
 
-                    {/* Card 1: Draggable Email Card */}
-                    <motion.div
-                      drag
-                      dragConstraints={deskRef}
-                      dragElastic={0.05}
-                      dragMomentum={false}
-                      onDrag={handleDrag}
-                      onDragEnd={handleDragEnd}
-                      whileDrag={{ scale: 1.05, zIndex: 40 }}
-                      initial={{ x: 20, y: 30 }}
-                      className="absolute w-72 brutalist-card bg-surface border-2 border-border p-5 cursor-grab active:cursor-grabbing text-left space-y-4"
-                    >
-                      <div className="flex justify-between items-center border-b border-border pb-2">
-                        <span className="font-mono text-[10px] text-accent tracking-widest font-black uppercase">PASS // EMAIL_NODE</span>
-                        <div className="w-2 h-2 rounded-full bg-accent" />
-                      </div>
-                      <div className="space-y-1">
-                        <span className="font-mono text-[9px] text-subtle uppercase">ADDRESS:</span>
-                        <p className="font-mono text-sm font-bold text-foreground break-all select-all">{email}</p>
-                      </div>
-                      <button
-                        onClick={copyEmail}
-                        className="w-full btn-primary !py-2 text-[10px] tracking-wider font-mono flex items-center justify-center gap-2"
-                      >
-                        <FaEnvelope size={11} aria-hidden="true" /> Click to Copy
-                      </button>
-                      <p className="font-mono text-[8px] text-muted text-center italic">
-                        * DRAG INTO DASHED TARGET BOX TO COPY *
-                      </p>
-                    </motion.div>
-
-                    {/* Card 2: Draggable GitHub Link */}
-                    <motion.div
-                      drag
-                      dragConstraints={deskRef}
-                      dragElastic={0.05}
-                      dragMomentum={false}
-                      whileDrag={{ scale: 1.05, zIndex: 40 }}
-                      initial={{ x: 280, y: 150 }}
-                      className="absolute w-64 brutalist-card bg-surface border-2 border-border p-5 cursor-grab active:cursor-grabbing text-left space-y-4"
-                    >
-                      <div className="flex justify-between items-center border-b border-border pb-2">
-                        <span className="font-mono text-[10px] text-accent tracking-widest font-black uppercase">LINK // GITHUB</span>
-                        <FaGithub size={12} className="text-muted" aria-hidden="true" />
-                      </div>
-                      <div className="space-y-1">
-                        <span className="font-mono text-[9px] text-subtle uppercase">REPOSITORY ROOT:</span>
-                        <p className="font-mono text-xs font-bold text-foreground">github.com/{user.login}</p>
-                      </div>
-                      <a
-                        href={user.html_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-full btn-secondary !py-2 text-[10px] tracking-wider font-mono flex items-center justify-center gap-2"
-                      >
-                        <FaRocket size={10} aria-hidden="true" /> Open Console
-                      </a>
-                    </motion.div>
-
-                    {/* Card 3: Draggable LinkedIn Link */}
-                    <motion.div
-                      drag
-                      dragConstraints={deskRef}
-                      dragElastic={0.05}
-                      dragMomentum={false}
-                      whileDrag={{ scale: 1.05, zIndex: 40 }}
-                      initial={{ x: 60, y: 240 }}
-                      className="absolute w-64 brutalist-card bg-surface border-2 border-border p-5 cursor-grab active:cursor-grabbing text-left space-y-4"
-                    >
-                      <div className="flex justify-between items-center border-b border-border pb-2">
-                        <span className="font-mono text-[10px] text-accent tracking-widest font-black uppercase">LINK // LINKEDIN</span>
-                        <FaLinkedin size={12} className="text-muted" aria-hidden="true" />
-                      </div>
-                      <div className="space-y-1">
-                        <span className="font-mono text-[9px] text-subtle uppercase">CONNECT NODE:</span>
-                        <p className="font-mono text-xs font-bold text-foreground">linkedin.com/in/sohelansarii</p>
-                      </div>
-                      <a
-                        href="https://linkedin.com/in/sohelansarii"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-full btn-secondary !py-2 text-[10px] tracking-wider font-mono flex items-center justify-center gap-2"
-                      >
-                        <FaRocket size={10} aria-hidden="true" /> Open Profile
-                      </a>
-                    </motion.div>
-
-                    {/* Card 4: Calendly scheduling sticker */}
-                    <motion.div
-                      drag
-                      dragConstraints={deskRef}
-                      dragElastic={0.05}
-                      dragMomentum={false}
-                      whileDrag={{ scale: 1.05, zIndex: 40 }}
-                      initial={{ x: 340, y: 30 }}
-                      className="absolute w-56 brutalist-card bg-accent border-2 border-black p-4 cursor-grab active:cursor-grabbing text-left space-y-3"
-                    >
-                      <div className="flex justify-between items-center border-b border-black pb-1.5">
-                        <span className="font-mono text-[9px] text-black font-black uppercase tracking-wider">BOOK // CHAT</span>
-                        <FaCalendarAlt size={10} className="text-black" aria-hidden="true" />
-                      </div>
-                      <p className="text-[10px] font-sans text-black leading-snug">
-                        Schedule a quick meeting to review project requirements.
-                      </p>
-                      <a
-                        href={`mailto:${email}?subject=Project Consultation`}
-                        className="w-full bg-black text-accent border border-black text-center block font-mono text-[9px] font-bold py-1.5 uppercase hover:bg-neutral-900 transition-colors"
-                      >
-                        Schedule Session
-                      </a>
-                    </motion.div>
-                  </div>
-                )}
               </Reveal>
             </div>
           </div>
