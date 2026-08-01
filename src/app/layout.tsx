@@ -45,6 +45,9 @@ export const metadata: Metadata = {
     images: ["https://avatars.githubusercontent.com/sohel22z"],
     creator: "@sohel22z",
   },
+  verification: {
+    google: "nuvLQ2uuqgBLFfdE4zlP_wBM-FWEm4JuzciugG7jryA",
+  },
 };
 
 export default function RootLayout({
