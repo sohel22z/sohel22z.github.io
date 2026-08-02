@@ -348,6 +348,7 @@ export default function HomePage() {
 
               <Reveal delay={0.05}>
                 <h1 className="heading-lg tracking-tighter text-left mb-6 font-extrabold uppercase leading-[0.9] select-none">
+                  <span className="sr-only">Sohel Ansari — React Developer & Frontend Architect — </span>
                   Redefining <br className="hidden md:inline" />
                   <span className="text-accent">digital</span> interfaces <br />
                   with speed.
@@ -402,7 +403,7 @@ export default function HomePage() {
                   <div className="relative aspect-square w-full border border-border bg-black overflow-hidden group">
                     <img
                       src={user.avatar_url}
-                      alt={user.name}
+                      alt={user.name || "Sohel Ansari - React Developer & Frontend Architect"}
                       width={320}
                       height={320}
                       fetchPriority="high"

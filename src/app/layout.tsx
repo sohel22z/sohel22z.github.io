@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { DM_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -14,10 +14,48 @@ const jetbrainsMono = JetBrains_Mono({
   variable: "--font-mono",
 });
 
+export const viewport: Viewport = {
+  themeColor: "#000000",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://sohel22z.github.io"),
   title: "Frontend Developer & React Architect | Sohel Ansari",
   description:
     "Frontend Architect specializing in high-performance React & Next.js systems. 3+ years experience delivering conversion-optimized web applications.",
+  keywords: [
+    "Sohel Ansari",
+    "Frontend Developer",
+    "React Developer",
+    "Next.js Developer",
+    "Frontend Architect",
+    "JavaScript Engineer",
+    "TypeScript",
+    "Web Performance",
+    "React Architect",
+    "Portfolio",
+  ],
+  authors: [{ name: "Sohel Ansari", url: "https://sohel22z.github.io/" }],
+  creator: "Sohel Ansari",
+  publisher: "Sohel Ansari",
+  category: "technology",
+  alternates: {
+    canonical: "https://sohel22z.github.io/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   icons: {
     icon: [
       { url: "/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" },
@@ -31,7 +69,14 @@ export const metadata: Metadata = {
     title: "Frontend Developer & React Architect | Sohel Ansari",
     description:
       "Frontend Architect specializing in high-performance React & Next.js systems. 3+ years experience delivering conversion-optimized web applications.",
-    images: [{ url: "https://avatars.githubusercontent.com/sohel22z", width: 460, height: 460, alt: "Sohel Ansari" }],
+    images: [
+      {
+        url: "https://avatars.githubusercontent.com/sohel22z",
+        width: 460,
+        height: 460,
+        alt: "Sohel Ansari - Frontend Developer & React Architect",
+      },
+    ],
     url: "https://sohel22z.github.io/",
     siteName: "Sohel Ansari Portfolio",
     locale: "en_US",
@@ -44,9 +89,10 @@ export const metadata: Metadata = {
       "Frontend Architect specializing in high-performance React & Next.js systems. 3+ years experience delivering conversion-optimized web applications.",
     images: ["https://avatars.githubusercontent.com/sohel22z"],
     creator: "@sohel22z",
+    site: "@sohel22z",
   },
   verification: {
-    google: "nuvLQ2uuqgBLFfdE4zlP_wBM-FWEm4JuzciugG7jryA",
+    google: ["googlee35592c95a484647", "nuvLQ2uuqgBLFfdE4zlP_wBM-FWEm4JuzciugG7jryA"],
   },
 };
 
@@ -58,7 +104,6 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${dmSans.variable} ${jetbrainsMono.variable}`}>
       <head>
-        <link rel="canonical" href="https://sohel22z.github.io/" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -80,6 +125,11 @@ export default function RootLayout({
                     "@type": "Organization",
                     "name": "Impero IT Services Pvt. Ltd."
                   },
+                  "address": {
+                    "@type": "PostalAddress",
+                    "addressCountry": "IN"
+                  },
+                  "knowsLanguage": ["English", "Hindi"],
                   "description": "Frontend Architect specializing in high-performance React & Next.js systems with over 3 years of industry experience.",
                   "knowsAbout": [
                     "JavaScript",
@@ -92,6 +142,32 @@ export default function RootLayout({
                     "Web Performance",
                     "Core Web Vitals",
                     "AI Engineering"
+                  ],
+                  "hasCredential": [
+                    {
+                      "@type": "EducationalOccupationalCredential",
+                      "name": "One Million Prompters",
+                      "credentialCategory": "Certificate",
+                      "recognizedBy": { "@type": "Organization", "name": "DFF" }
+                    },
+                    {
+                      "@type": "EducationalOccupationalCredential",
+                      "name": "React Native Specialization",
+                      "credentialCategory": "Certificate",
+                      "recognizedBy": { "@type": "Organization", "name": "Meta / Coursera" }
+                    },
+                    {
+                      "@type": "EducationalOccupationalCredential",
+                      "name": "Advanced React",
+                      "credentialCategory": "Certificate",
+                      "recognizedBy": { "@type": "Organization", "name": "Meta / Coursera" }
+                    },
+                    {
+                      "@type": "EducationalOccupationalCredential",
+                      "name": "JavaScript Algorithms and Data Structures",
+                      "credentialCategory": "Certificate",
+                      "recognizedBy": { "@type": "Organization", "name": "freeCodeCamp" }
+                    }
                   ]
                 },
                 {
@@ -108,6 +184,9 @@ export default function RootLayout({
                   "@id": "https://sohel22z.github.io/#profile",
                   "url": "https://sohel22z.github.io/",
                   "name": "Sohel Ansari Portfolio & Developer Specs",
+                  "mainEntity": {
+                    "@id": "https://sohel22z.github.io/#person"
+                  },
                   "about": {
                     "@id": "https://sohel22z.github.io/#person"
                   }
