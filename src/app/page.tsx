@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { AnimatePresence, motion, useInView, useReducedMotion } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
@@ -457,6 +458,12 @@ export default function HomePage() {
                   {item.label}
                 </button>
               ))}
+              <Link
+                href="/responsive-scaler"
+                className="font-mono text-xs uppercase tracking-wider text-accent border border-accent/40 hover:bg-accent hover:text-black px-3 py-1.5 rounded-full transition-all flex items-center gap-1 font-bold"
+              >
+                <FaRocket size={10} /> Auto-Scaler ⚡
+              </Link>
             </nav>
 
             <div className="flex items-center gap-3">
@@ -508,6 +515,14 @@ export default function HomePage() {
                     {item.label}
                   </button>
                 ))}
+                <Link
+                  href="/responsive-scaler"
+                  className="block w-full text-left font-mono py-2.5 px-4 text-xs uppercase tracking-widest text-accent font-bold bg-accent/10 border border-accent/30 rounded-lg transition-colors flex items-center justify-between"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <span>Viewport Auto-Scaler</span>
+                  <span className="text-[10px] bg-accent text-black px-2 py-0.5 rounded uppercase font-bold">NEW</span>
+                </Link>
                 <div className="pt-2">
                   <a
                     href={resumePath}
@@ -717,6 +732,34 @@ export default function HomePage() {
                 </Reveal>
               ))}
             </div>
+
+            {/* Featured Layout Engine Innovation Banner */}
+            <Reveal delay={0.1}>
+              <div className="mt-8 glass-card p-6 md:p-8 border-accent/40 bg-gradient-to-r from-surface-alt via-surface to-surface-alt relative overflow-hidden">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                  <div className="space-y-2 max-w-2xl">
+                    <div className="flex items-center gap-2">
+                      <span className="tag tag-accent text-xs">RECENT INVENTION & TOOL</span>
+                      <span className="font-mono text-[10px] text-accent font-bold">100% RESPONSIVE FIT</span>
+                    </div>
+                    <h3 className="heading-md text-foreground flex items-center gap-2">
+                      Universal Viewport Autoscaler Engine <FaRocket className="text-accent" size={16} />
+                    </h3>
+                    <p className="text-sm text-muted leading-relaxed">
+                      An engineered ratio-scale solution that forces any web app or dashboard layout to render with identical pixel proportion across all screen widths without layout breaks or reflow jumps.
+                    </p>
+                  </div>
+                  <div className="shrink-0">
+                    <Link
+                      href="/responsive-scaler"
+                      className="btn-primary flex items-center gap-2 text-xs py-3 px-6 shadow-lg shadow-accent/20"
+                    >
+                      Try Live Simulator <FaArrowRight size={12} />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
 
             {/* Open Source / GitHub Repos Section */}
             <Reveal>
