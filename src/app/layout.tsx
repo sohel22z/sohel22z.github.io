@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { DM_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { profile, siteMetadata } from "./data";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -15,35 +16,23 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#000000",
+  themeColor: "#09090b",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://sohel22z.github.io"),
-  title: "Frontend Developer & React Architect | Sohel Ansari",
-  description:
-    "Frontend Architect specializing in high-performance React & Next.js systems. 3+ years experience delivering conversion-optimized web applications.",
-  keywords: [
-    "Sohel Ansari",
-    "Frontend Developer",
-    "React Developer",
-    "Next.js Developer",
-    "Frontend Architect",
-    "JavaScript Engineer",
-    "TypeScript",
-    "Web Performance",
-    "React Architect",
-    "Portfolio",
-  ],
-  authors: [{ name: "Sohel Ansari", url: "https://sohel22z.github.io/" }],
-  creator: "Sohel Ansari",
-  publisher: "Sohel Ansari",
+  metadataBase: new URL(profile.siteUrl),
+  title: siteMetadata.title,
+  description: siteMetadata.description,
+  keywords: siteMetadata.keywords,
+  authors: [{ name: profile.name, url: profile.siteUrl }],
+  creator: profile.name,
+  publisher: profile.name,
   category: "technology",
   alternates: {
-    canonical: "https://sohel22z.github.io/",
+    canonical: profile.siteUrl,
   },
   robots: {
     index: true,
@@ -66,30 +55,28 @@ export const metadata: Metadata = {
   },
   manifest: "/favicon/site.webmanifest",
   openGraph: {
-    title: "Frontend Developer & React Architect | Sohel Ansari",
-    description:
-      "Frontend Architect specializing in high-performance React & Next.js systems. 3+ years experience delivering conversion-optimized web applications.",
+    title: siteMetadata.title,
+    description: siteMetadata.description,
     images: [
       {
-        url: "https://avatars.githubusercontent.com/sohel22z",
+        url: siteMetadata.ogImage,
         width: 460,
         height: 460,
-        alt: "Sohel Ansari - Frontend Developer & React Architect",
+        alt: `${profile.name} - ${profile.title}`,
       },
     ],
-    url: "https://sohel22z.github.io/",
-    siteName: "Sohel Ansari Portfolio",
+    url: profile.siteUrl,
+    siteName: `${profile.name} Portfolio`,
     locale: "en_US",
     type: "profile",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Frontend Developer & React Architect | Sohel Ansari",
-    description:
-      "Frontend Architect specializing in high-performance React & Next.js systems. 3+ years experience delivering conversion-optimized web applications.",
-    images: ["https://avatars.githubusercontent.com/sohel22z"],
-    creator: "@sohel22z",
-    site: "@sohel22z",
+    title: siteMetadata.title,
+    description: siteMetadata.description,
+    images: [siteMetadata.ogImage],
+    creator: `@${profile.github}`,
+    site: `@${profile.github}`,
   },
   verification: {
     google: ["googlee35592c95a484647", "nuvLQ2uuqgBLFfdE4zlP_wBM-FWEm4JuzciugG7jryA"],
@@ -112,83 +99,46 @@ export default function RootLayout({
               "@graph": [
                 {
                   "@type": "Person",
-                  "@id": "https://sohel22z.github.io/#person",
-                  "name": "Sohel Ansari",
-                  "url": "https://sohel22z.github.io/",
-                  "image": "https://avatars.githubusercontent.com/sohel22z",
+                  "@id": `${profile.siteUrl}#person`,
+                  "name": profile.name,
+                  "url": profile.siteUrl,
+                  "image": profile.avatarUrl,
                   "sameAs": [
-                    "https://github.com/sohel22z",
-                    "https://linkedin.com/in/sohelansarii"
+                    profile.githubUrl,
+                    profile.linkedinUrl,
                   ],
-                  "jobTitle": "React Developer & Frontend Architect",
+                  "jobTitle": siteMetadata.schema.jobTitle,
                   "worksFor": {
                     "@type": "Organization",
-                    "name": "Impero IT Services Pvt. Ltd."
+                    "name": siteMetadata.schema.worksFor
                   },
                   "address": {
                     "@type": "PostalAddress",
                     "addressCountry": "IN"
                   },
                   "knowsLanguage": ["English", "Hindi"],
-                  "description": "Frontend Architect specializing in high-performance React & Next.js systems with over 3 years of industry experience.",
-                  "knowsAbout": [
-                    "JavaScript",
-                    "React",
-                    "TypeScript",
-                    "Tailwind CSS",
-                    "Redux",
-                    "Next.js",
-                    "SEO",
-                    "Web Performance",
-                    "Core Web Vitals",
-                    "AI Engineering"
-                  ],
-                  "hasCredential": [
-                    {
-                      "@type": "EducationalOccupationalCredential",
-                      "name": "One Million Prompters",
-                      "credentialCategory": "Certificate",
-                      "recognizedBy": { "@type": "Organization", "name": "DFF" }
-                    },
-                    {
-                      "@type": "EducationalOccupationalCredential",
-                      "name": "React Native Specialization",
-                      "credentialCategory": "Certificate",
-                      "recognizedBy": { "@type": "Organization", "name": "Meta / Coursera" }
-                    },
-                    {
-                      "@type": "EducationalOccupationalCredential",
-                      "name": "Advanced React",
-                      "credentialCategory": "Certificate",
-                      "recognizedBy": { "@type": "Organization", "name": "Meta / Coursera" }
-                    },
-                    {
-                      "@type": "EducationalOccupationalCredential",
-                      "name": "JavaScript Algorithms and Data Structures",
-                      "credentialCategory": "Certificate",
-                      "recognizedBy": { "@type": "Organization", "name": "freeCodeCamp" }
-                    }
-                  ]
+                  "description": siteMetadata.schema.description,
+                  "knowsAbout": siteMetadata.schema.knowsAbout,
                 },
                 {
                   "@type": "WebSite",
-                  "@id": "https://sohel22z.github.io/#website",
-                  "url": "https://sohel22z.github.io/",
-                  "name": "Sohel Ansari - Frontend Developer Portfolio",
+                  "@id": `${profile.siteUrl}#website`,
+                  "url": profile.siteUrl,
+                  "name": `${profile.name} - ${profile.title} Portfolio`,
                   "publisher": {
-                    "@id": "https://sohel22z.github.io/#person"
+                    "@id": `${profile.siteUrl}#person`
                   }
                 },
                 {
                   "@type": "ProfilePage",
-                  "@id": "https://sohel22z.github.io/#profile",
-                  "url": "https://sohel22z.github.io/",
-                  "name": "Sohel Ansari Portfolio & Developer Specs",
+                  "@id": `${profile.siteUrl}#profile`,
+                  "url": profile.siteUrl,
+                  "name": `${profile.name} Portfolio`,
                   "mainEntity": {
-                    "@id": "https://sohel22z.github.io/#person"
+                    "@id": `${profile.siteUrl}#person`
                   },
                   "about": {
-                    "@id": "https://sohel22z.github.io/#person"
+                    "@id": `${profile.siteUrl}#person`
                   }
                 }
               ]
