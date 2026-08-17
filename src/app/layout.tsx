@@ -79,7 +79,7 @@ export const metadata: Metadata = {
     site: `@${profile.github}`,
   },
   verification: {
-    google: ["googlee35592c95a484647", "nuvLQ2uuqgBLFfdE4zlP_wBM-FWEm4JuzciugG7jryA"],
+    google: "googlee35592c95a484647",
   },
 };
 
@@ -91,6 +91,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${dmSans.variable} ${jetbrainsMono.variable}`}>
       <head>
+        <meta name="google-site-verification" content="nuvLQ2uuqgBLFfdE4zlP_wBM-FWEm4JuzciugG7jryA" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

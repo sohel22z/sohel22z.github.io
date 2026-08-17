@@ -58,7 +58,7 @@ export const siteMetadata = {
     "JavaScript",
     "Portfolio",
   ],
-  ogImage: "https://avatars.githubusercontent.com/sohel22z",
+  ogImage: "https://avatars.githubusercontent.com/u/90556891?v=4",
   schema: {
     jobTitle: "Full Stack Developer",
     worksFor: "Traveltekpro IT Solutions",
