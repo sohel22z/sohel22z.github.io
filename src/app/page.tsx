@@ -234,15 +234,25 @@ export default function HomePage() {
 
             {/* Center Nav */}
             <div className="hidden md:flex items-center gap-0.5 absolute left-1/2 -translate-x-1/2">
-              {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollTo(item.id)}
-                  className="font-mono text-[0.6875rem] uppercase tracking-wider text-muted hover:text-foreground px-3 py-1.5 rounded-md hover:bg-white/5 transition-colors"
-                >
-                  {item.label}
-                </button>
-              ))}
+              {navItems.map((item) =>
+                "href" in item && item.href ? (
+                  <Link
+                    key={item.id}
+                    href={item.href}
+                    className="font-mono text-[0.6875rem] uppercase tracking-wider text-muted hover:text-foreground px-3 py-1.5 rounded-md hover:bg-white/5 transition-colors"
+                  >
+                    {item.label}
+                  </Link>
+                ) : (
+                  <button
+                    key={item.id}
+                    onClick={() => scrollTo(item.id)}
+                    className="font-mono text-[0.6875rem] uppercase tracking-wider text-muted hover:text-foreground px-3 py-1.5 rounded-md hover:bg-white/5 transition-colors"
+                  >
+                    {item.label}
+                  </button>
+                )
+              )}
             </div>
 
             {/* Right Side */}
@@ -284,15 +294,25 @@ export default function HomePage() {
               transition={{ duration: 0.15 }}
             >
               <div className="header-glass scrolled p-3 space-y-1">
-                {navItems.map((item) => (
-                  <button
-                    key={item.id}
-                    onClick={() => scrollTo(item.id)}
-                    className="flex items-center w-full font-mono text-xs uppercase tracking-wider text-muted hover:text-foreground hover:bg-white/5 px-4 py-2.5 rounded-lg transition-colors"
-                  >
-                    {item.label}
-                  </button>
-                ))}
+                {navItems.map((item) =>
+                  "href" in item && item.href ? (
+                    <Link
+                      key={item.id}
+                      href={item.href}
+                      className="flex items-center w-full font-mono text-xs uppercase tracking-wider text-muted hover:text-foreground hover:bg-white/5 px-4 py-2.5 rounded-lg transition-colors"
+                    >
+                      {item.label}
+                    </Link>
+                  ) : (
+                    <button
+                      key={item.id}
+                      onClick={() => scrollTo(item.id)}
+                      className="flex items-center w-full font-mono text-xs uppercase tracking-wider text-muted hover:text-foreground hover:bg-white/5 px-4 py-2.5 rounded-lg transition-colors"
+                    >
+                      {item.label}
+                    </button>
+                  )
+                )}
                 <a
                   href={`mailto:${profile.email}?subject=Project Consultation`}
                   className="flex items-center gap-2 w-full font-mono text-xs uppercase tracking-wider text-black bg-accent hover:bg-accent-dark px-4 py-2.5 rounded-lg transition-colors mt-2"

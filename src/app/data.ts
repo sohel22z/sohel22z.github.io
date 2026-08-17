@@ -25,6 +25,7 @@ export const stats = [
 
 export const navItems = [
   { id: "repos", label: "Projects" },
+  { id: "blog", label: "Blog", href: "/notes" },
   { id: "contact", label: "Contact" },
 ];
 
