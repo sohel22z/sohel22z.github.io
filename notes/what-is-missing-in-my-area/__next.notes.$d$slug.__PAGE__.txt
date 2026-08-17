@@ -1,0 +1,7 @@
+1:"$Sreact.fragment"
+2:I[79029,["/_next/static/chunks/05-c3ty_6dwfk.js","/_next/static/chunks/14mrh2-p_w84d.js","/_next/static/chunks/1y96w8akx8hgs.js","/_next/static/chunks/38x1poby1qxk0.js"],"BlogPostPage"]
+3:I[28441,["/_next/static/chunks/05-c3ty_6dwfk.js","/_next/static/chunks/14mrh2-p_w84d.js","/_next/static/chunks/1y96w8akx8hgs.js","/_next/static/chunks/38x1poby1qxk0.js"],"WhatIsMissingContent"]
+4:I[97367,["/_next/static/chunks/05-c3ty_6dwfk.js","/_next/static/chunks/14mrh2-p_w84d.js"],"OutletBoundary"]
+5:"$Sreact.suspense"
+0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"post":{"slug":"what-is-missing-in-my-area","title":"What Is Missing in My Area?","subtitle":"A Local Opportunity Discovery Platform for Business Owners and Explorers","category":"Product Idea","date":"August 2026","readingTime":"12 min read","description":"A platform that helps people understand their local area by identifying gaps, trends, competition, and opportunities — for both business owners and explorers."},"ContentComponent":"$3"}],[["$","script","script-0",{"src":"/_next/static/chunks/1y96w8akx8hgs.js","async":true}],["$","script","script-1",{"src":"/_next/static/chunks/38x1poby1qxk0.js","async":true}]],["$","$L4",null,{"children":["$","$5",null,{"name":"Next.MetadataOutlet","children":"$@6"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"0DBDuMx_fzm0xUnquITz0"}
+6:null
